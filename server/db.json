@@ -48,6 +48,13 @@
       "role": "student",
       "name": "Arif",
       "id": 7
+    },
+    {
+      "email": "noyan@gmail.com",
+      "password": "$2a$10$4J4upguQ0wGZXWQ3qpDuCe6C5XIwFJ32lb5YCnepqjsyRb2NlyUAK",
+      "name": "Noyan",
+      "role": "student",
+      "id": 8
     }
   ],
   "videos": [
