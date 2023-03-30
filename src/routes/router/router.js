@@ -1,6 +1,12 @@
 import Video from 'components/student/video/Video';
 import Course from 'layouts/Course';
 import Main from 'layouts/Main';
+import AdminLogin from 'pages/admin/AdminLogin';
+import Assginment from 'pages/admin/Assignment';
+import AssignmentMark from 'pages/admin/AssignmentMark';
+import Dashboard from 'pages/admin/Dashboard';
+import Quizzes from 'pages/admin/Quizzes';
+import Videos from 'pages/admin/Videos';
 import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
@@ -28,6 +34,32 @@ export const router = createBrowserRouter([
       {
         path: '/registration',
         element: <StudentRegistration />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <Dashboard />,
+    children: [
+      {
+        path: '/admin/login',
+        element: <AdminLogin />,
+      },
+      {
+        path: '/admin/assignment',
+        element: <Assginment />,
+      },
+      {
+        path: '/admin/assignmentMark',
+        element: <AssignmentMark />,
+      },
+      {
+        path: '/admin/quizzes',
+        element: <Quizzes />,
+      },
+      {
+        path: '/videos',
+        element: <Videos />,
       },
     ],
   },
