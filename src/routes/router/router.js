@@ -8,6 +8,8 @@ import AssignmentMark from 'pages/admin/AssignmentMark';
 import Dashboard from 'pages/admin/Dashboard';
 import Quizzes from 'pages/admin/Quizzes';
 import Videos from 'pages/admin/Videos';
+import Leaderboard from 'pages/student/Leaderboard';
+import Quiz from 'pages/student/Quiz';
 import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
       {
         path: '/registration',
         element: <StudentRegistration />,
+      },
+      {
+        path: 'leaderboard',
+        element: <Leaderboard />,
+      },
+      {
+        path: '/quiz',
+        element: <Quiz />,
       },
     ],
   },
