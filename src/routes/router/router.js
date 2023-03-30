@@ -1,4 +1,5 @@
 import Video from 'components/student/video/Video';
+import AdminDashboard from 'layouts/AdminDashboard';
 import Course from 'layouts/Course';
 import Main from 'layouts/Main';
 import AdminLogin from 'pages/admin/AdminLogin';
@@ -39,8 +40,12 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Dashboard />,
+    element: <AdminDashboard />,
     children: [
+      {
+        path: '/admin',
+        element: <Dashboard />,
+      },
       {
         path: '/admin/login',
         element: <AdminLogin />,
