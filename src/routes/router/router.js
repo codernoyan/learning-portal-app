@@ -38,6 +38,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // admin dashboard route
   {
     path: '/admin',
     element: <AdminDashboard />,
@@ -63,7 +64,7 @@ export const router = createBrowserRouter([
         element: <Quizzes />,
       },
       {
-        path: '/videos',
+        path: '/admin/videos',
         element: <Videos />,
       },
     ],
