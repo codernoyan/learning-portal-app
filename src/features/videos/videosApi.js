@@ -26,5 +26,11 @@ export const videosApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    deleteVideo: builder.query({
+      query: (id) => ({
+        url: `/videos/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
