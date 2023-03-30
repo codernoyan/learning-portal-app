@@ -1,7 +1,8 @@
 import Login from 'components/student/login/Login';
 import Registration from 'components/student/registration/Registration';
+import Video from 'components/student/video/Video';
+import Course from 'layouts/Course';
 import Main from 'layouts/Main';
-import CoursePlayer from 'pages/coursePlayer/CoursePlayer';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -12,9 +13,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <CoursePlayer />,
+        element: <Course />,
         children: [
-
+          {
+            path: '/videos/:videoId',
+            element: <Video />,
+          },
         ],
       },
       {
