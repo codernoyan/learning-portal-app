@@ -1,8 +1,8 @@
-import Login from 'components/student/login/Login';
-import Registration from 'components/student/registration/Registration';
 import Video from 'components/student/video/Video';
 import Course from 'layouts/Course';
 import Main from 'layouts/Main';
+import StudentLogin from 'pages/student/StudentLogin';
+import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -23,11 +23,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />,
+        element: <StudentLogin />,
       },
       {
         path: '/registration',
-        element: <Registration />,
+        element: <StudentRegistration />,
       },
     ],
   },
