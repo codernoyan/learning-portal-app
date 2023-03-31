@@ -1,6 +1,6 @@
-import Assignment from './Assignment';
+import AssignmentItem from './AssignmentItem';
 
-export default function Assignments() {
+export default function AssignmentList() {
   return (
     <div className="overflow-x-auto mt-4">
       <table className="divide-y-1 text-base divide-gray-600 w-full">
@@ -13,7 +13,7 @@ export default function Assignments() {
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-600/50">
-          <Assignment />
+          <AssignmentItem />
         </tbody>
       </table>
     </div>

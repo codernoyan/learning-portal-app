@@ -1,4 +1,4 @@
-export default function Assignment() {
+export default function AssignmentItem() {
   return (
     <tr>
       <td className="table-td">Assignment 1 - Scoreboard Application</td>

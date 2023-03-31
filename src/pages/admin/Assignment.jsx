@@ -1,4 +1,4 @@
-import Assignments from 'components/admin/assignment/Assignments';
+import AssignmentItem from 'components/admin/assignment/AssignmentItem';
 
 export default function Assginment() {
   return (
@@ -9,7 +9,7 @@ export default function Assginment() {
             <button type="button" className="btn ml-auto">Add Assignment</button>
           </div>
           {/* all assignments */}
-          <Assignments />
+          <AssignmentItem />
         </div>
       </div>
     </section>
