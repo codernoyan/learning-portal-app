@@ -1,4 +1,34 @@
+import { useRegisterMutation } from 'features/auth/authApi';
+import { useState } from 'react';
+
 export default function StudentRegistration() {
+  const [register, { isLoading, isError, error }] = useRegisterMutation();
+  const [registerInfo, setRegisterInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  // login handler
+  const handleStudentRegistration = (e) => {
+    e.preventDefault();
+    if (registerInfo.password !== registerInfo.confirmPassword) {
+      window.alert('Password does not match');
+    } else {
+      delete registerInfo.confirmPassword;
+      // register
+      register({ ...registerInfo, role: 'student' });
+      // reset
+      setRegisterInfo({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+    }
+  };
+
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">
       <div className="mx-auto max-w-md px-5 lg:px-0">
@@ -8,28 +38,28 @@ export default function StudentRegistration() {
             Create Your New Account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form onSubmit={handleStudentRegistration} className="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">Name</label>
-              <input id="name" name="name" type="name" autoComplete="name" required className="login-input rounded-t-md" placeholder="Student Name" />
+              <input onChange={(e) => setRegisterInfo({ ...registerInfo, name: e.target.value })} id="name" name="name" type="name" autoComplete="name" required className="login-input rounded-t-md" placeholder="Student Name" value={registerInfo.name} />
             </div>
             <div>
               <label htmlFor="email-address" className="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" autoComplete="email" required className="login-input " placeholder="Email address" />
+              <input onChange={(e) => setRegisterInfo({ ...registerInfo, email: e.target.value })} id="email-address" name="email" type="email" autoComplete="email" required className="login-input " placeholder="Email address" value={registerInfo.email} />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">Password</label>
-              <input id="password" name="password" type="password" autoComplete="current-password" required className="login-input" placeholder="Password" />
+              <input onChange={(e) => setRegisterInfo({ ...registerInfo, password: e.target.value })} id="password" name="password" type="password" autoComplete="current-password" required className="login-input" placeholder="Password" value={registerInfo.password} />
             </div>
             <div>
               <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
-              <input id="confirm-password" name="confirm-password" type="password" autoComplete="confirm-password" required className="login-input rounded-b-md" placeholder="Confirm Password" />
+              <input onChange={(e) => setRegisterInfo({ ...registerInfo, confirmPassword: e.target.value })} id="confirm-password" name="confirm-password" type="password" autoComplete="confirm-password" required className="login-input rounded-b-md" placeholder="Confirm Password" value={registerInfo.confirmPassword} />
             </div>
           </div>
           <div>
-            <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+            <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500" disabled={isLoading}>
               Create Account
             </button>
           </div>

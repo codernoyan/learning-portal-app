@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function StudentLogin() {
   const [login, {
-    data, isLoading, isError, error,
+    isLoading, isError, error,
   }] = useLoginMutation();
   // user info state
   const [loginInfo, setLoginInfo] = useState({

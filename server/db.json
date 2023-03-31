@@ -55,6 +55,13 @@
       "name": "Noyan",
       "role": "student",
       "id": 8
+    },
+    {
+      "email": "william@gmail.com",
+      "password": "$2a$10$rpF1UHD9AbSkJ0gDCfdnhuV0cJLX5.lSKUva1AhTSZFxg66Hkc7Gm",
+      "name": "William Simith",
+      "role": "student",
+      "id": 9
     }
   ],
   "videos": [
