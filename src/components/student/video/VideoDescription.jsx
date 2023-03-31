@@ -12,7 +12,7 @@ export default function VideoDescription({ video = {} }) {
       <h2 className=" pb-4 text-sm leading-[1.7142857] text-slate-400">
         Uploaded on
         {' '}
-        {new Date(createdAt).toDateString()}
+        {new Date(createdAt).toDateString().slice(4)}
 
       </h2>
       <div className="flex gap-4">
