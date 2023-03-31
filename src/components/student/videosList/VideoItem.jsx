@@ -14,7 +14,6 @@ export default function VideoItem() {
           <p className="text-slate-50 text-sm font-medium">
             Things I wish I knew as a Junior Web
             Developer - Sumit Saha - BASIS SoftExpo 2023
-
           </p>
         </Link>
         <div>

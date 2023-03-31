@@ -1,11 +1,16 @@
 import { useLoginMutation } from 'features/auth/authApi';
+import { useGetUsersQuery } from 'features/users/usersApi';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
+  const { data: users } = useGetUsersQuery();
   const [login, {
+    data: response,
     isLoading, isError, error,
   }] = useLoginMutation();
+
+  const navigate = useNavigate();
   // user info state
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -16,13 +21,20 @@ export default function AdminLogin() {
   const handleAdminLogin = (e) => {
     e.preventDefault();
     // console.log(data);
-    login(loginInfo);
+    const indexOfAdmin = users?.findIndex(({ email }) => email === loginInfo.email);
+    const adminData = users[indexOfAdmin];
+    if (indexOfAdmin !== -1) {
+      login(loginInfo);
+    }
     // reset
     setLoginInfo({
       email: '',
       password: '',
     });
+    // navbigate to admin dashboard
+    navigate('/admin');
   };
+
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">
       <div className="mx-auto max-w-md px-5 lg:px-0">
