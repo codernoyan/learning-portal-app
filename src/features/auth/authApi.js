@@ -15,7 +15,7 @@ export const authApi = apiSlice.injectEndpoints({
           const { data: result } = await queryFulfilled;
           // auth information
           const authInfo = {
-            accesstoken: result.accesstoken,
+            accessToken: result.accessToken,
             user: result.user,
           };
           // update to localStorage
@@ -40,7 +40,7 @@ export const authApi = apiSlice.injectEndpoints({
           const { data: result } = await queryFulfilled;
           // auth information
           const authInfo = {
-            accesstoken: result.accesstoken,
+            accessToken: result.accessToken,
             user: result.user,
           };
           // update to localStorage
