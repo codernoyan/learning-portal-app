@@ -2,15 +2,21 @@ import logoImage from 'assets/image/learningportal.svg';
 import { selectAuth } from 'features/auth/authSelector';
 import { userLogout } from 'features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const { user } = useSelector(selectAuth);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
     dispatch(userLogout());
+    if (user?.role === 'student') {
+      navigate('/login');
+    } else {
+      navigate('/admin/login');
+    }
   };
 
   return (
