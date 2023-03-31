@@ -31,14 +31,6 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: '/login',
-        element: <StudentLogin />,
-      },
-      {
-        path: '/registration',
-        element: <StudentRegistration />,
-      },
-      {
         path: 'leaderboard',
         element: <Leaderboard />,
       },
@@ -48,6 +40,16 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // separate login route
+  {
+    path: '/login',
+    element: <StudentLogin />,
+  },
+  // separate register route
+  {
+    path: '/register',
+    element: <StudentRegistration />,
+  },
   // admin dashboard route
   {
     path: '/admin',
@@ -56,10 +58,6 @@ export const router = createBrowserRouter([
       {
         path: '/admin',
         element: <Dashboard />,
-      },
-      {
-        path: '/admin/login',
-        element: <AdminLogin />,
       },
       {
         path: '/admin/assignment',
@@ -78,5 +76,9 @@ export const router = createBrowserRouter([
         element: <Videos />,
       },
     ],
+  },
+  {
+    path: '/admin/login',
+    element: <AdminLogin />,
   },
 ]);
