@@ -1,4 +1,28 @@
+import { useLoginMutation } from 'features/auth/authApi';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 export default function AdminLogin() {
+  const [login, {
+    isLoading, isError, error,
+  }] = useLoginMutation();
+  // user info state
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: '',
+  });
+
+  // login handler
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    // console.log(data);
+    login(loginInfo);
+    // reset
+    setLoginInfo({
+      email: '',
+      password: '',
+    });
+  };
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">
       <div className="mx-auto max-w-md px-5 lg:px-0">
@@ -8,23 +32,23 @@ export default function AdminLogin() {
             Sign in to Admin Account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form onSubmit={handleAdminLogin} className="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" autoComplete="email" required className="login-input rounded-t-md" placeholder="Email address" />
+              <input onChange={(e) => setLoginInfo({ ...loginInfo, email: e.target.value })} id="email-address" name="email" type="email" autoComplete="email" required className="login-input rounded-t-md" placeholder="Email address" value={loginInfo.email} />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">Password</label>
-              <input id="password" name="password" type="password" autoComplete="current-password" required className="login-input rounded-b-md" placeholder="Password" />
+              <input onChange={(e) => setLoginInfo({ ...loginInfo, password: e.target.value })} id="password" name="password" type="password" autoComplete="current-password" required className="login-input rounded-b-md" placeholder="Password" value={loginInfo.password} />
             </div>
           </div>
           <div className="flex items-center justify-end">
             <div className="text-sm">
-              <a href="/" className="font-medium text-violet-600 hover:text-violet-500">
+              <Link to="/" className="font-medium text-violet-600 hover:text-violet-500">
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
           <div>
