@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function VideoDescription() {
   return (
     <div>
@@ -13,12 +15,11 @@ export default function VideoDescription() {
         <a href="/" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
           এসাইনমেন্ট
         </a>
-        <a href="./Quiz.html" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+        <Link to="/quiz" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
           কুইজে
           অংশগ্রহণ
           করুন
-
-        </a>
+        </Link>
       </div>
       <p className="mt-4 text-sm text-slate-400 leading-6">
         আপনারা যারা বিগিনার হিসেবে রিয়্যাক্ট জেস নিয়ে কাজ করা শুরু করেছেন, তারা রিয়্যাক্ট এর বেশ
