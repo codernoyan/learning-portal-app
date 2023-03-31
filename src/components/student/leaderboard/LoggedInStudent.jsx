@@ -16,8 +16,8 @@ export default function LoggedInStudent() {
   const { data: quizmarks, isLoading: quizMarkLoading } = useGetQuizMarkQuery(id);
 
   // sum of assignment mark
-  const sumOfAssignmentMark = assignmentMarks?.reduce((prev, curr) => prev + curr.totalMark, 0);
-  const sumOfQuizMark = quizmarks?.reduce((prev, curr) => prev + curr.totalMark, 0);
+  const sumOfAssignmentMark = assignmentMarks?.reduce((prev, curr) => prev + curr.mark, 0);
+  const sumOfQuizMark = quizmarks?.reduce((prev, curr) => prev + curr.mark, 0);
 
   // total mark calculation
   let totalMark = 0;

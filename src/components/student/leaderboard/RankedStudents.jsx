@@ -1,4 +1,28 @@
+import { selectAuth } from 'features/auth/authSelector';
+import { useGetUsersQuery } from 'features/users/usersApi';
+import { useSelector } from 'react-redux';
+import Error from 'ui/Error';
+import Loading from 'ui/Loading';
+import RankedStudent from './RankedStudent';
+
 export default function RankedStudents() {
+  const { user: { email } } = useSelector(selectAuth) || {};
+
+  const {
+    data: users, isLoading, isError, error,
+  } = useGetUsersQuery(email);
+
+  let content = null;
+  if (isLoading) {
+    content = <Loading />;
+  } else if (!isLoading && isError) {
+    content = <Error message={error?.error} />;
+  } else if (!isLoading && !isError && users?.length === 0) {
+    content = <Error message="No videos found!" />;
+  } else if (!isLoading && !isError && users?.length > 0) {
+    content = users.map((user, i) => <RankedStudent key={user.id} user={user} />);
+  }
+
   return (
     <div className="my-8">
       <h3 className="text-lg font-bold">Top 20 Result</h3>
@@ -13,48 +37,7 @@ export default function RankedStudents() {
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
-          <tr className="border-b border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
-          <tr className="border-b border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
-          <tr className="border-b border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
-          <tr className="border-b border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
-          <tr className="border-slate-600/50">
-            <td className="table-td text-center">4</td>
-            <td className="table-td text-center">Saad Hasan</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">50</td>
-            <td className="table-td text-center">100</td>
-          </tr>
+          {content}
         </tbody>
       </table>
     </div>

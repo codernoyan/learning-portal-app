@@ -3,8 +3,8 @@ import { apiSlice } from 'features/api/apiSlice';
 export const usersApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => ({
-        url: '/users',
+      query: (email) => ({
+        url: `/users?role_ne=admin&email_ne=${email}`,
       }),
     }),
     getUser: builder.query({
