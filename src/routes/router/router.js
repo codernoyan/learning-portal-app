@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
         element: <Leaderboard />,
       },
       {
-        path: '/quiz',
+        path: '/quiz/:videoId',
         element: <Quiz />,
       },
     ],
