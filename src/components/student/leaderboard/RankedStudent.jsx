@@ -1,7 +1,7 @@
 import { useGetAssigmentMarksByStudentIdQuery } from 'features/assignmentMarks/assignmentMarksApi';
 import { useGetQuizMarkQuery } from 'features/quizMark/quizMarkApi';
 
-export default function RankedStudent({ user }) {
+export default function RankedStudent({ user, index }) {
   const { id, name } = user || {};
   const {
     data: assignmentMarks, isLoading: assignmentMarkLoading, isError, error,
@@ -25,7 +25,7 @@ export default function RankedStudent({ user }) {
 
   return (
     <tr className="border-b border-slate-600/50">
-      <td className="table-td text-center">4</td>
+      <td className="table-td text-center">{index + 1}</td>
       <td className="table-td text-center">{name}</td>
       <td className="table-td text-center">{quizMarkLoading ? 'Loading' : sumOfQuizMark}</td>
       <td className="table-td text-center">{assignmentMarkLoading ? 'Loading' : sumOfAssignmentMark}</td>

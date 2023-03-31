@@ -1,9 +1,30 @@
+import { useGetAssignmentByVideoIdQuery } from 'features/assignments/assignmentsApi';
 import { Link } from 'react-router-dom';
 
 export default function VideoDescription({ video = {} }) {
   const {
     id, title, description, createdAt,
   } = video;
+
+  const {
+    data: assignment, isLoading, isError, error,
+  } = useGetAssignmentByVideoIdQuery(id);
+
+  let content = null;
+  if (isLoading) {
+    content = 'Loading';
+  } else if (!isLoading && isError) {
+    content = `${error?.error}`;
+  } else if (!isLoading && !isError && Object.keys(assignment)?.length === 0) {
+    content = null;
+  } else if (!isLoading && !isError && Object.keys(assignment)?.length > 0) {
+    content = (
+      <Link to="/assignment" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+        এসাইনমেন্ট
+      </Link>
+    );
+  }
+
   return (
     <div>
       <h1 className="text-lg font-semibold tracking-tight text-slate-100">
@@ -16,9 +37,7 @@ export default function VideoDescription({ video = {} }) {
 
       </h2>
       <div className="flex gap-4">
-        <Link to="/assignment" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
-          এসাইনমেন্ট
-        </Link>
+        {content}
         <Link to="/quiz" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
           কুইজে
           অংশগ্রহণ

@@ -1,16 +1,12 @@
-import { selectAuth } from 'features/auth/authSelector';
 import { useGetUsersQuery } from 'features/users/usersApi';
-import { useSelector } from 'react-redux';
 import Error from 'ui/Error';
 import Loading from 'ui/Loading';
 import RankedStudent from './RankedStudent';
 
 export default function RankedStudents() {
-  const { user: { email } } = useSelector(selectAuth) || {};
-
   const {
     data: users, isLoading, isError, error,
-  } = useGetUsersQuery(email);
+  } = useGetUsersQuery();
 
   let content = null;
   if (isLoading) {
@@ -20,7 +16,7 @@ export default function RankedStudents() {
   } else if (!isLoading && !isError && users?.length === 0) {
     content = <Error message="No videos found!" />;
   } else if (!isLoading && !isError && users?.length > 0) {
-    content = users.map((user, i) => <RankedStudent key={user.id} user={user} />);
+    content = users.map((user, index) => <RankedStudent key={user.id} user={user} index={index} />);
   }
 
   return (
