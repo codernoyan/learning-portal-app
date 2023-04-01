@@ -1,23 +1,45 @@
+import { useGetAssigmentMarksQuery } from 'features/assignmentMarks/assignmentMarksApi';
 import Mark from './Mark';
 
 export default function Marks() {
+  const {
+    data: assignmentMarks, isLoading, isError, error,
+  } = useGetAssigmentMarksQuery();
+
+  let content = null;
+  let pendingMark = null;
+  let markSent = null;
+
+  if (isLoading) {
+    content = <tr><td>Loading....</td></tr>;
+  } else if (!isLoading && isError) {
+    content = <tr><td>{error?.error}</td></tr>;
+  } else if (!isLoading && !isError && assignmentMarks?.length === 0) {
+    content = <tr><td>No Videos found!</td></tr>;
+  } else if (!isLoading && !isError && assignmentMarks?.length > 0) {
+    content = assignmentMarks.map((assignment) => <Mark key={assignment.id} assignment={assignment} />);
+    // marks statistics
+    pendingMark = assignmentMarks.filter((assignment) => assignment.status === 'pending');
+    markSent = assignmentMarks.filter((assignment) => assignment.status === 'published');
+  }
+
   return (
     <div className="px-3 py-20 bg-opacity-10">
       <ul className="assignment-status">
         <li>
           Total
           {' '}
-          <span>4</span>
+          <span>{isLoading ? 0 : assignmentMarks?.length}</span>
         </li>
         <li>
           Pending
           {' '}
-          <span>3</span>
+          <span>{isLoading ? 0 : pendingMark?.length}</span>
         </li>
         <li>
           Mark Sent
           {' '}
-          <span>1</span>
+          <span>{isLoading ? 0 : markSent?.length}</span>
         </li>
       </ul>
       <div className="overflow-x-auto mt-4">
@@ -32,7 +54,7 @@ export default function Marks() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-600/50">
-            <Mark />
+            {content}
           </tbody>
         </table>
       </div>
