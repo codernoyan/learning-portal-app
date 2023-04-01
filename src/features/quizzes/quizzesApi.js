@@ -34,6 +34,18 @@ export const quizzesApi = apiSlice.injectEndpoints({
         url: `/quizzes/${id}`,
         method: 'DELETE',
       }),
+      // optimistic update
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(apiSlice.util.updateQueryData('getQuizzes', undefined, (draft) => {
+          const indexToDelete = draft.findIndex((quiz) => quiz.id === id);
+          draft.splice(indexToDelete, 1);
+        }));
+        try {
+          const quizzes = await queryFulfilled;
+        } catch (err) {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });

@@ -36,6 +36,18 @@ export const assignmentsApi = apiSlice.injectEndpoints({
         url: `/assignments/${id}`,
         method: 'DELETE',
       }),
+      // optimistic update
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(apiSlice.util.updateQueryData('getAssignments', undefined, (draft) => {
+          const indexToDelete = draft.findIndex((assignment) => assignment.id === id);
+          draft.splice(indexToDelete, 1);
+        }));
+        try {
+          const assignments = await queryFulfilled;
+        } catch (err) {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });
