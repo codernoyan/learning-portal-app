@@ -8,7 +8,7 @@ export default function Quizitem({ quiz, index }) {
         {' '}
         {index + 1}
         {' '}
-        -g
+        -
         {' '}
         {question}
       </td>
