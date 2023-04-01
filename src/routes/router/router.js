@@ -13,6 +13,7 @@ import Quiz from 'pages/student/Quiz';
 import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
+import PrivateRoute from 'routes/privateRoute/PrivateRoute';
 
 export const router = createBrowserRouter([
   // student portal
@@ -22,21 +23,37 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Course />,
+        element: (
+          <PrivateRoute>
+            <Course />
+          </PrivateRoute>
+        ),
         children: [
           {
             path: '/videos/:videoId',
-            element: <Video />,
+            element: (
+              <PrivateRoute>
+                <Video />
+              </PrivateRoute>
+            ),
           },
         ],
       },
       {
         path: 'leaderboard',
-        element: <Leaderboard />,
+        element: (
+          <PrivateRoute>
+            <Leaderboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/quiz/:videoId',
-        element: <Quiz />,
+        element: (
+          <PrivateRoute>
+            <Quiz />
+          </PrivateRoute>
+        ),
       },
     ],
   },
