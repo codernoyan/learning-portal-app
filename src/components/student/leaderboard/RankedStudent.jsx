@@ -1,6 +1,6 @@
 export default function RankedStudent({ user, index }) {
   const {
-    id, name, totalAssignmentMark, totalQuizMark,
+    id, name, totalAssignmentMark, totalQuizMark, totalMark,
   } = user || {};
   // const {
   //   data: assignmentMarks, isLoading: assignmentMarkLoading, isError, error,
@@ -29,7 +29,7 @@ export default function RankedStudent({ user, index }) {
         <td className="table-td text-center">{name}</td>
         <td className="table-td text-center">{totalQuizMark}</td>
         <td className="table-td text-center">{totalAssignmentMark}</td>
-        <td className="table-td text-center">{totalQuizMark + totalAssignmentMark}</td>
+        <td className="table-td text-center">{totalMark}</td>
       </tr>
     </tbody>
   );

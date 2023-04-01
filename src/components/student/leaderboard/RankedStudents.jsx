@@ -26,8 +26,12 @@ export default function RankedStudents() {
       name: user?.name,
       totalAssignmentMark: assignmentMark || 0,
       totalQuizMark: quizMark || 0,
+      totalMark: assignmentMark || 0 + quizMark || 0,
     };
   });
+
+  // sort ranking
+  const sortByTotalMark = (a, b) => b.totalMark - a.totalMark;
 
   let content = null;
   if (isLoading) {
@@ -37,7 +41,7 @@ export default function RankedStudents() {
   } else if (!isLoading && !isError && newModifedArray?.length === 0) {
     content = <Error message="No videos found!" />;
   } else if (!isLoading && !isError && newModifedArray?.length > 0) {
-    content = newModifedArray.map((user, index) => <RankedStudent key={user.id} user={user} index={index} />);
+    content = newModifedArray.sort(sortByTotalMark).map((user, index) => <RankedStudent key={user.id} user={user} index={index} />);
   }
 
   // console.log(newModifedArray);
