@@ -10,7 +10,7 @@ export default function Mark({ assignment }) {
   const [newMark, setNewMark] = useState(mark);
 
   // edit assignment mark api
-  const [editAssignmentMark, { isLoading, isError, error }] = useEditAssignmentMarkMutation();
+  const [editAssignmentMark, { isLoading }] = useEditAssignmentMarkMutation();
 
   // date formatting
   const date = new Date(createdAt);
@@ -20,7 +20,6 @@ export default function Mark({ assignment }) {
   // add mark handler
   const handleAddMark = (e) => {
     e.preventDefault();
-    console.log(Number(newMark));
     // mark update to server
     editAssignmentMark({
       id,
@@ -43,7 +42,7 @@ export default function Mark({ assignment }) {
               <td className="table-td input-mark">
                 <form onSubmit={handleAddMark} className="flex gap-2 justify-end">
                   <input onChange={(e) => setNewMark(e.target.value)} max={100} defaultValue={newMark} />
-                  <button type="submit">
+                  <button type="submit" disabled={isLoading}>
                     <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-green-500 cursor-pointer hover:text-green-400">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>

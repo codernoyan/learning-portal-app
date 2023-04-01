@@ -31,6 +31,18 @@ export const videosApi = apiSlice.injectEndpoints({
         url: `/videos/${id}`,
         method: 'DELETE',
       }),
+      // optimistic update
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(apiSlice.util.updateQueryData('getVideos', undefined, (draft) => {
+          const indexToDelete = draft.findIndex((video) => video.id === id);
+          draft.splice(indexToDelete, 1);
+        }));
+        try {
+          const videos = await queryFulfilled;
+        } catch (err) {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });
