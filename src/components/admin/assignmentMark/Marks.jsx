@@ -6,6 +6,7 @@ export default function Marks() {
     data: assignmentMarks, isLoading, isError, error,
   } = useGetAssigmentMarksQuery();
 
+  // let's decide what will be rendered
   let content = null;
   let pendingMark = null;
   let markSent = null;
