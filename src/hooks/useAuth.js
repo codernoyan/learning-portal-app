@@ -1,0 +1,11 @@
+import { selectAuth } from 'features/auth/authSelector';
+import { useSelector } from 'react-redux';
+
+export default function useAuth() {
+  const auth = useSelector(selectAuth);
+
+  if (auth?.accessToken && auth?.user) {
+    return true;
+  }
+  return false;
+}
