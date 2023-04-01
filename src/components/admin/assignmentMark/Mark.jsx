@@ -16,7 +16,7 @@ export default function Mark({ assignment }) {
   // add mark handler
   const handleAddMark = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+    console.log(Number(newMark));
   };
 
   return (
@@ -31,7 +31,7 @@ export default function Mark({ assignment }) {
               <td className="table-td input-mark">
                 <form onSubmit={handleAddMark} className="flex gap-2 justify-end">
                   <input onChange={(e) => setNewMark(e.target.value)} max={100} defaultValue={newMark} />
-                  <button type="button">
+                  <button type="submit">
                     <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-green-500 cursor-pointer hover:text-green-400">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>
