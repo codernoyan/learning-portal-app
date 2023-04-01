@@ -1,7 +1,9 @@
 import { useGetAssignmentByVideoIdQuery } from 'features/assignments/assignmentsApi';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function VideoDescription({ video = {} }) {
+  const [showModal, setShowModal] = useState(false);
   const {
     id, title, description, createdAt,
   } = video;
@@ -18,10 +20,15 @@ export default function VideoDescription({ video = {} }) {
   } else if (!isLoading && !isError && Object.keys(assignment)?.length === 0) {
     content = null;
   } else if (!isLoading && !isError && Object.keys(assignment)?.length > 0) {
+    // content = (
+    //   <Link to="/assignment" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+    //     এসাইনমেন্ট
+    //   </Link>
+    // );
     content = (
-      <Link to="/assignment" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+      <button type="button" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
         এসাইনমেন্ট
-      </Link>
+      </button>
     );
   }
 
@@ -47,6 +54,8 @@ export default function VideoDescription({ video = {} }) {
       <p className="mt-4 text-sm text-slate-400 leading-6">
         {description}
       </p>
+      {/* modal */}
+
     </div>
   );
 }
