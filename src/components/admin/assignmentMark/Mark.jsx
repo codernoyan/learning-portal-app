@@ -1,3 +1,4 @@
+import { useEditAssignmentMarkMutation } from 'features/assignmentMarks/assignmentMarksApi';
 import { useState } from 'react';
 
 /* eslint-disable camelcase */
@@ -8,6 +9,9 @@ export default function Mark({ assignment }) {
   // new mark state
   const [newMark, setNewMark] = useState(mark);
 
+  // edit assignment mark api
+  const [editAssignmentMark, { isLoading, isError, error }] = useEditAssignmentMarkMutation();
+
   // date formatting
   const date = new Date(createdAt);
   const submissionDate = date.toDateString().slice(4);
@@ -17,6 +21,14 @@ export default function Mark({ assignment }) {
   const handleAddMark = (e) => {
     e.preventDefault();
     console.log(Number(newMark));
+    // mark update to server
+    editAssignmentMark({
+      id,
+      data: {
+        status: 'published',
+        mark: Number(newMark),
+      },
+    });
   };
 
   return (
