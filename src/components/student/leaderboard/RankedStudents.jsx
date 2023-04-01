@@ -1,8 +1,6 @@
 import { useGetAssigmentMarksQuery } from 'features/assignmentMarks/assignmentMarksApi';
 import { useGetQuizMarksQuery } from 'features/quizMark/quizMarkApi';
 import { useGetUsersQuery } from 'features/users/usersApi';
-import Error from 'ui/Error';
-import Loading from 'ui/Loading';
 import RankedStudent from './RankedStudent';
 
 export default function RankedStudents() {
@@ -35,11 +33,11 @@ export default function RankedStudents() {
 
   let content = null;
   if (isLoading) {
-    content = <Loading />;
+    content = <tr><td>Loading....</td></tr>;
   } else if (!isLoading && isError) {
-    content = <Error message={error?.error} />;
+    content = <tr><td>{error?.error}</td></tr>;
   } else if (!isLoading && !isError && newModifedArray?.length === 0) {
-    content = <Error message="No videos found!" />;
+    content = <tr><td>No student found!</td></tr>;
   } else if (!isLoading && !isError && newModifedArray?.length > 0) {
     content = newModifedArray.sort(sortByTotalMark).map((user, index) => <RankedStudent key={user.id} user={user} index={index} />);
   }
@@ -59,7 +57,9 @@ export default function RankedStudents() {
             <th className="table-th !text-center">Total</th>
           </tr>
         </thead>
-        {content}
+        <tbody>
+          {content}
+        </tbody>
       </table>
     </div>
   );
