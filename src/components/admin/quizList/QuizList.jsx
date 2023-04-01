@@ -12,7 +12,7 @@ export default function QuizList() {
   } else if (!isLoading && isError) {
     content = <tr><td>{error?.error}</td></tr>;
   } else if (!isLoading && !isError && quizzes?.length === 0) {
-    content = <tr><td>No Videos found!</td></tr>;
+    content = <tr><td>No quizzes found!</td></tr>;
   } else if (!isLoading && !isError && quizzes?.length > 0) {
     content = quizzes.map((quiz, index) => <Quizitem key={quiz.id} quiz={quiz} index={index} />);
   }

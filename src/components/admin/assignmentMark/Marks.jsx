@@ -16,7 +16,7 @@ export default function Marks() {
   } else if (!isLoading && isError) {
     content = <tr><td>{error?.error}</td></tr>;
   } else if (!isLoading && !isError && assignmentMarks?.length === 0) {
-    content = <tr><td>No Videos found!</td></tr>;
+    content = <tr><td>No marks found!</td></tr>;
   } else if (!isLoading && !isError && assignmentMarks?.length > 0) {
     content = assignmentMarks.map((assignment) => <Mark key={assignment.id} assignment={assignment} />);
     // marks statistics

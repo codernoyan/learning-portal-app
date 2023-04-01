@@ -12,7 +12,7 @@ export default function AssignmentList() {
   } else if (!isLoading && isError) {
     content = <tr><td>{error?.error}</td></tr>;
   } else if (!isLoading && !isError && assignments?.length === 0) {
-    content = <tr><td>No Videos found!</td></tr>;
+    content = <tr><td>No assignments found!</td></tr>;
   } else if (!isLoading && !isError && assignments?.length > 0) {
     content = assignments.map((assignment, index) => <AssignmentItem key={assignment.id} assignment={assignment} index={index} />);
   }
