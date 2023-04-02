@@ -2,7 +2,7 @@
 import { useAddVideoMutation } from 'features/videos/videosApi';
 import { useState } from 'react';
 
-export default function AddVideoInfo({ setShowModal }) {
+export default function EditVideoInfo({ setShowModal }) {
   const [addVideo, { isLoading, isError, error }] = useAddVideoMutation();
   // video info state
   const [input, setInput] = useState({
