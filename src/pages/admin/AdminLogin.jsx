@@ -23,9 +23,9 @@ export default function AdminLogin() {
     // console.log(data);
     const indexOfAdmin = users?.findIndex(({ email }) => email === loginInfo.email);
     const adminData = users[indexOfAdmin];
-    if (indexOfAdmin !== -1) {
-      login(loginInfo);
-    }
+    // if (indexOfAdmin !== -1) {
+    // }
+    login(loginInfo);
     // reset
     setLoginInfo({
       email: '',

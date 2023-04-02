@@ -14,6 +14,7 @@ import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from 'routes/privateRoute/PrivateRoute';
+import PublicStudent from 'routes/publicRoutes/PublicStudent';
 
 export const router = createBrowserRouter([
   // student portal
@@ -60,7 +61,11 @@ export const router = createBrowserRouter([
   // separate login route
   {
     path: '/login',
-    element: <StudentLogin />,
+    element: (
+      <PublicStudent>
+        <StudentLogin />
+      </PublicStudent>
+    ),
   },
   // separate register route
   {
