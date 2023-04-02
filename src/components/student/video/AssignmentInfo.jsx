@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useAddAssignmentMarkMutation } from 'features/assignmentMarks/assignmentMarksApi';
 import { selectAuth } from 'features/auth/authSelector';
 import { useState } from 'react';
