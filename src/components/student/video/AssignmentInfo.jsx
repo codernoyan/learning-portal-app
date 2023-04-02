@@ -1,15 +1,31 @@
+import { useAddAssignmentMarkMutation } from 'features/assignmentMarks/assignmentMarksApi';
+import { selectAuth } from 'features/auth/authSelector';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 /* eslint-disable react/no-unescaped-entities */
 export default function AssignmentInfo({ assignmentData, setShowModal }) {
   const [githubLink, setGithubLink] = useState('');
+  const { user } = useSelector(selectAuth);
+  const [addAssignmentMark, { isLoading, isError, error }] = useAddAssignmentMarkMutation();
   const { id, title } = assignmentData;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const confirmation = window.confirm('Are you sure?');
+    const confirmation = window.confirm('Are you sure you want to submit?');
     if (confirmation) {
-      console.log(githubLink);
+      const data = {
+        student_id: user?.id,
+        student_name: user?.name,
+        assignment_id: id,
+        title,
+        createdAt: new Date().toISOString(),
+        totalMark: 100,
+        mark: 0,
+        repo_link: githubLink,
+        status: 'pending',
+      };
+      addAssignmentMark(data);
     } else {
       return;
     }
