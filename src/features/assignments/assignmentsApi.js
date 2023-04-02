@@ -23,6 +23,19 @@ export const assignmentsApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      // pessimistic update for add video
+      async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
+        try {
+          const assignment = await queryFulfilled;
+          if (Object.keys(assignment.data).length > 1) {
+            dispatch(apiSlice.util.updateQueryData('getAssignments', undefined, (draft) => {
+              draft.push(assignment.data);
+            }));
+          }
+        } catch (err) {
+          // console.log(err);
+        }
+      },
     }),
     editAssignment: builder.mutation({
       query: ({ id, data }) => ({

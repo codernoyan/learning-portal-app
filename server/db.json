@@ -125,6 +125,13 @@
       "video_id": 2,
       "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "totalMark": 100
+    },
+    {
+      "title": "Assignment 3 - Create a Minified Lws",
+      "video_id": 4,
+      "video_title": "#3 Facing the Future: The Truth About Artificial Intelligence and Our Jobs - Bangla",
+      "totalMark": 100,
+      "id": 3
     }
   ],
   "quizzes": [

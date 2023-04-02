@@ -24,9 +24,9 @@ export default function AssignmentModal({ id }) {
     content = <Loading />;
   } else if (!isLoading && isError) {
     content = <Error message={error?.error} />;
-  } else if (!isLoading && !isError && Object.keys(assignmentData)?.length === 0) {
+  } else if (!isLoading && !isError && Object.keys(assignmentData[0])?.length === 0) {
     content = <Error message="No assignment found!" />;
-  } else if (!isLoading && !isError && !markLoading && Object.keys(assignmentData)?.length > 0) {
+  } else if (!isLoading && !isError && !markLoading && Object.keys(assignmentData[0])?.length > 0) {
     // send assignment information to a separate component
     content = <AssignmentInfo assignmentData={assignmentData[0]} setShowModal={setShowModal} />;
     // let's check if the student submit student or not
