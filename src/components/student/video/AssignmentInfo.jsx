@@ -1,6 +1,22 @@
+import { useState } from 'react';
+
 /* eslint-disable react/no-unescaped-entities */
 export default function AssignmentInfo({ assignmentData, setShowModal }) {
+  const [githubLink, setGithubLink] = useState('');
   const { id, title } = assignmentData;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const confirmation = window.confirm('Are you sure?');
+    if (confirmation) {
+      console.log(githubLink);
+    } else {
+      return;
+    }
+    // disappear modal
+    setShowModal(false);
+  };
+
   return (
     <>
       <div
@@ -11,7 +27,7 @@ export default function AssignmentInfo({ assignmentData, setShowModal }) {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* header */}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold text-black">
+              <h3 className="text-2xl font-semibold text-black">
                 {title}
               </h3>
               <button
@@ -25,33 +41,30 @@ export default function AssignmentInfo({ assignmentData, setShowModal }) {
               </button>
             </div>
             {/* body */}
-            <div className="relative p-6 flex-auto">
-              <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                I always felt like I could do anything. That’s the main
-                thing people are controlled by! Thoughts- their perception
-                of themselves! They're slowed down by their perception of
-                themselves. If you're taught you can’t do anything, you
-                won’t do anything. I was taught I could do everything.
-                {title}
-              </p>
-            </div>
-            {/* footer */}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-              <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Submit Assignment
-              </button>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="relative p-6 flex-auto">
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="assignment" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">GitHub Repository Link</label>
+                  <input onChange={(e) => setGithubLink(e.target.value)} value={githubLink} id="assignment" type="text" name="repository_link" className="border border-black p-2 text-black" placeholder="Ex: https://github.com/learning-portal-lws" required />
+                </div>
+              </div>
+              {/* footer */}
+              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                <button
+                  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
+                >
+                  Submit Assignment
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
