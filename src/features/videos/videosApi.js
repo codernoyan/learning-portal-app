@@ -18,6 +18,19 @@ export const videosApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      // pessimistic update for add video
+      async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
+        try {
+          const videoData = await queryFulfilled;
+          if (Object.keys(videoData.data).length > 1) {
+            dispatch(apiSlice.util.updateQueryData('getVideos', undefined, (draft) => {
+              draft.push(videoData.data);
+            }));
+          }
+        } catch (err) {
+          // console.log(err);
+        }
+      },
     }),
     editVideo: builder.mutation({
       query: ({ id, data }) => ({

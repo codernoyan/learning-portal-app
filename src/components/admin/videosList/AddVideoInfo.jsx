@@ -15,7 +15,12 @@ export default function AddVideoInfo({ setShowModal }) {
   // add a video
   const handleAddVideo = (e) => {
     e.preventDefault();
-    console.log(input);
+    const confirmation = window.confirm('Are you sure you want to add it?');
+    if (confirmation) {
+      addVideo(input);
+    } else {
+      return;
+    }
     setShowModal(false);
   };
 
@@ -53,7 +58,7 @@ export default function AddVideoInfo({ setShowModal }) {
                 {/* url */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="url" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video URL</label>
-                  <input onChange={(e) => setInput({ ...input, url: e.target.value })} value={input.url} id="url" type="text" name="url" className="border border-black p-2 text-black" placeholder="Ex: https://github.com/learning-portal-lws" required />
+                  <input onChange={(e) => setInput({ ...input, url: e.target.value })} value={input.url} id="url" type="text" name="url" className="border border-black p-2 text-black" placeholder="Ex: https://youtu.be/99RWZsEITx4" required />
                 </div>
                 {/* views and duration */}
                 <div className="columns-xs mb-1">
