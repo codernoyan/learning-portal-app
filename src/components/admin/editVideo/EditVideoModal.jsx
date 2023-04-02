@@ -1,8 +1,28 @@
+import { useGetVideoQuery } from 'features/videos/videosApi';
 import { useState } from 'react';
+import Error from 'ui/Error';
+import Loading from 'ui/Loading';
 import EditVideoInfo from './EditVideoInfo';
 
-export default function EditVideoModal() {
+export default function EditVideoModal({ id }) {
   const [showModal, setShowModal] = useState(false);
+
+  // get a single video
+  const {
+    data: video, isLoading, isError, error,
+  } = useGetVideoQuery(id) || {};
+
+  // let's decide what will be rendered
+  let content = null;
+  if (isLoading) {
+    content = <Loading />;
+  } else if (!isLoading && isError) {
+    content = <Error message={error?.error} />;
+  } else if (!isLoading && !isError && Object.keys(video)?.length === 0) {
+    content = <Error message="No video found!" />;
+  } else if (!isLoading && !isError && Object.keys(video)?.length > 0) {
+    content = <EditVideoInfo video={video} setShowModal={setShowModal} />;
+  }
   return (
     <>
       <button type="button" onClick={() => setShowModal(true)}>
@@ -11,7 +31,7 @@ export default function EditVideoModal() {
         </svg>
       </button>
       {showModal ? (
-        <EditVideoInfo setShowModal={setShowModal} />
+        content
       ) : null}
     </>
   );

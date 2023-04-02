@@ -1,24 +1,32 @@
 /* eslint-disable no-alert */
-import { useAddVideoMutation } from 'features/videos/videosApi';
+import { useEditVideoMutation } from 'features/videos/videosApi';
 import { useState } from 'react';
 
-export default function EditVideoInfo({ setShowModal }) {
-  const [addVideo, { isLoading, isError, error }] = useAddVideoMutation();
+export default function EditVideoInfo({ video, setShowModal }) {
+  // destructure the data
+  const {
+    id, title, description, url, views, duration,
+  } = video || {};
+
+  // edit video api
+  const [editVideo, { isLoading, isError, error }] = useEditVideoMutation();
+
   // video info state
   const [input, setInput] = useState({
-    title: '',
-    description: '',
-    url: '',
-    views: '',
-    duration: '',
+    id,
+    title,
+    description,
+    url,
+    views,
+    duration,
     createdAt: new Date().toISOString(),
   });
   // add a video
   const handleAddVideo = (e) => {
     e.preventDefault();
-    const confirmation = window.confirm('Are you sure you want to add it?');
+    const confirmation = window.confirm('Are you sure you want to update it?');
     if (confirmation) {
-      addVideo(input);
+      editVideo({ id: input.id, data: input });
     } else {
       return;
     }
@@ -36,7 +44,7 @@ export default function EditVideoInfo({ setShowModal }) {
             {/* header */}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
               <h3 className="text-2xl font-semibold text-black">
-                Add Video
+                Edit Video
               </h3>
               <button
                 type="button"
@@ -95,7 +103,7 @@ export default function EditVideoInfo({ setShowModal }) {
                   type="submit"
                   className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
                 >
-                  Add
+                  Update
                 </button>
               </div>
             </form>

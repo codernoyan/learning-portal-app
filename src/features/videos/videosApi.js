@@ -38,6 +38,20 @@ export const videosApi = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: data,
       }),
+      // pessimistic update
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedVideoData } = await queryFulfilled;
+          dispatch(apiSlice.util.updateQueryData('getVideos', undefined, (draft) => {
+            const indexToUpdate = draft?.findIndex((video) => video.id === id);
+            draft[indexToUpdate] = { ...updatedVideoData };
+          }));
+          // silently update a single video data
+          dispatch(apiSlice.util.updateQueryData('getVideo', id, (draft) => updatedVideoData));
+        } catch (err) {
+          // console.error(err);
+        }
+      },
     }),
     deleteVideo: builder.mutation({
       query: (id) => ({
