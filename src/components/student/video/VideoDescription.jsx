@@ -21,16 +21,6 @@ export default function VideoDescription({ video = {} }) {
   } else if (!isLoading && !isError && Object.keys(assignment)?.length === 0) {
     content = null;
   } else if (!isLoading && !isError && Object.keys(assignment)?.length > 0) {
-    // content = (
-    //   <Link to="/assignment" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
-    //     এসাইনমেন্ট
-    //   </Link>
-    // );
-    // content = (
-    //   <button type="button" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
-    //     এসাইনমেন্ট
-    //   </button>
-    // );
     content = <AssignmentModal id={id} />;
   }
 
