@@ -23,7 +23,7 @@ export const assignmentsApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      // pessimistic update for add video
+      // pessimistic update for add assignment
       async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
         try {
           const assignment = await queryFulfilled;
@@ -39,10 +39,24 @@ export const assignmentsApi = apiSlice.injectEndpoints({
     }),
     editAssignment: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/quizzes/${id}`,
+        url: `/assignments/${id}`,
         method: 'PATCH',
         body: data,
       }),
+      // pessimistic update
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: upadatedAssignment } = await queryFulfilled;
+          dispatch(apiSlice.util.updateQueryData('getAssignments', undefined, (draft) => {
+            const indexToUpdate = draft?.findIndex((assignment) => assignment.id === id);
+            draft[indexToUpdate] = { ...upadatedAssignment };
+          }));
+          // silently update a single assignment data
+          dispatch(apiSlice.util.updateQueryData('getAssignment', id, (draft) => upadatedAssignment));
+        } catch (err) {
+          // console.error(err);
+        }
+      },
     }),
     deleteAssignment: builder.mutation({
       query: (id) => ({
