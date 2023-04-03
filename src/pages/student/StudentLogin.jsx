@@ -47,10 +47,15 @@ export default function StudentLogin() {
               <input onChange={(e) => setLoginInfo({ ...loginInfo, password: e.target.value })} id="password" name="password" type="password" autoComplete="current-password" required className="login-input rounded-b-md" placeholder="Password" value={loginInfo.password} />
             </div>
           </div>
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-between">
             <div className="text-sm">
               <Link to="/register" className="font-medium text-violet-600 hover:text-violet-500">
                 Create New Account
+              </Link>
+            </div>
+            <div className="text-sm">
+              <Link to="/admin/login" className="font-medium text-violet-600 hover:text-violet-500">
+                Admin Login
               </Link>
             </div>
           </div>

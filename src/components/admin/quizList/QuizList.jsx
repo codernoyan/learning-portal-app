@@ -1,4 +1,5 @@
 import { useGetQuizzesQuery } from 'features/quizzes/quizzesApi';
+import AddQuizModal from '../addQuiz/AddQuizModal';
 import Quizitem from './QuizItem';
 
 export default function QuizList() {
@@ -17,17 +18,25 @@ export default function QuizList() {
     content = quizzes.map((quiz, index) => <Quizitem key={quiz.id} quiz={quiz} index={index} />);
   }
   return (
-    <table className="divide-y-1 text-base divide-gray-600 w-full">
-      <thead>
-        <tr>
-          <th className="table-th">Question</th>
-          <th className="table-th">Video</th>
-          <th className="table-th justify-center">Action</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-slate-600/50">
-        {content}
-      </tbody>
-    </table>
+    <div className="px-3 py-20 bg-opacity-10">
+      {/* <div className="w-full flex">
+        <button type="button" className="btn ml-auto">Add Quiz</button>
+      </div> */}
+      <AddQuizModal />
+      <div className="overflow-x-auto mt-4">
+        <table className="divide-y-1 text-base divide-gray-600 w-full">
+          <thead>
+            <tr>
+              <th className="table-th">Question</th>
+              <th className="table-th">Video</th>
+              <th className="table-th justify-center">Action</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-600/50">
+            {content}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
