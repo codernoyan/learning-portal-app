@@ -36,8 +36,7 @@ export default function EditAssignmentInfo({ assignment, setShowModal }) {
     }
   }, [selectedVideo]);
 
-  // console.log(input);
-  // add a video
+  // edit a assignment
   const handleAddAssignment = (e) => {
     e.preventDefault();
     const confirmation = window.confirm('Are you sure you want to add it?');
@@ -91,7 +90,6 @@ export default function EditAssignmentInfo({ assignment, setShowModal }) {
                   {/* video title */}
                   <div className="flex flex-col gap-1 flex-grow">
                     <label htmlFor="video_title" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video Title</label>
-                    {/* <input onChange={(e) => setInput({ ...input, views: e.target.value })} value={input.views} id="views" type="text" name="views" className="border border-black p-2 text-black" placeholder="Ex: 4.4K" required /> */}
                     <select
                       onChange={(e) => setInput({ ...input, video_title: e.target.value })}
                       value={input.video_title}
