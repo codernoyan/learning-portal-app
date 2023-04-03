@@ -23,6 +23,19 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      // pessimistic update for add assignment mark
+      async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
+        try {
+          const assignmentMark = await queryFulfilled;
+          if (Object.keys(assignmentMark.data).length > 1) {
+            dispatch(apiSlice.util.updateQueryData('getAssigmentMarks', undefined, (draft) => {
+              draft.push(assignmentMark.data);
+            }));
+          }
+        } catch (err) {
+          // console.log(err);
+        }
+      },
     }),
     editAssignmentMark: builder.mutation({
       query: ({ id, data }) => ({
