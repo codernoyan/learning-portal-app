@@ -15,7 +15,7 @@ export default function Navbar() {
     if (user?.role === 'student') {
       localStorage.clear();
       dispatch(userLogout());
-      navigate('/login');
+      navigate('/');
     } else {
       localStorage.clear();
       dispatch(userLogout());
@@ -29,7 +29,7 @@ export default function Navbar() {
         {
           user?.role === 'student'
             ? (
-              <Link to="/videos/1">
+              <Link to="course/videos/1">
                 <img className="h-10" src={logoImage} alt="logo" />
               </Link>
             )

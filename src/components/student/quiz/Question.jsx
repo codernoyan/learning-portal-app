@@ -4,7 +4,6 @@ export default function Question({ quiz, index }) {
   const { id, question, options } = quiz || {};
 
   const [input, setInput] = useState([]);
-  console.log(input);
 
   // find true
   const findCorrect = input.filter((option) => option.isCorrect);

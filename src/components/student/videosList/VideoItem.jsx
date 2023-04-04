@@ -14,7 +14,7 @@ export default function VideoItem({ video = {} }) {
       </svg>
       {/* Description */}
       <div className="flex flex-col w-full">
-        <Link to={`/videos/${id}`}>
+        <Link to={`/course/videos/${id}`}>
           <p className="text-slate-50 text-sm font-medium">
             {title}
           </p>

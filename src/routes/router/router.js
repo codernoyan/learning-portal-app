@@ -25,13 +25,29 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: (
+          <PublicStudent>
+            <StudentLogin />
+          </PublicStudent>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <PublicStudent>
+            <StudentLogin />
+          </PublicStudent>
+        ),
+      },
+      {
+        path: '/course',
+        element: (
           <PrivateRoute>
             <Course />
           </PrivateRoute>
         ),
         children: [
           {
-            path: '/videos/:videoId',
+            path: '/course/videos/:videoId',
             element: (
               <PrivateRoute>
                 <Video />
@@ -59,14 +75,14 @@ export const router = createBrowserRouter([
     ],
   },
   // separate login route
-  {
-    path: '/login',
-    element: (
-      <PublicStudent>
-        <StudentLogin />
-      </PublicStudent>
-    ),
-  },
+  // {
+  //   path: '/login',
+  //   element: (
+  //     <PublicStudent>
+  //       <StudentLogin />
+  //     </PublicStudent>
+  //   ),
+  // },
   // separate register route
   {
     path: '/register',

@@ -23,7 +23,7 @@ export default function StudentLogin() {
       email: '',
       password: '',
     });
-    navigate('/videos/1');
+    navigate('course/videos/1');
   };
 
   return (
