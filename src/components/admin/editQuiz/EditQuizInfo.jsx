@@ -1,16 +1,28 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-alert */
-import { useAddQuizMutation } from 'features/quizzes/quizzesApi';
-import { useGetVideosQuery } from 'features/videos/videosApi';
-import { useState } from 'react';
+import { useEditQuizMutation } from 'features/quizzes/quizzesApi';
+import { useGetVideoQuery, useGetVideosQuery } from 'features/videos/videosApi';
+import { useEffect, useState } from 'react';
 
-export default function AddQuizInfo({ setShowModal }) {
-  const [addQuiz, { isLoading, isError, error }] = useAddQuizMutation();
+export default function EditQuizInfo({ quiz, setShowModal }) {
+  // destructure quiz info
+  const {
+    id, question, video_id, video_title, options,
+  } = quiz || {};
+
+  // edit quiz
+  const [editQuiz, { isLoading, isError, error }] = useEditQuizMutation();
+
+  // get videos
   const { data: videos } = useGetVideosQuery();
+  const { data: selectedVideo } = useGetVideoQuery(video_id);
   // quiz info state
   const [input, setInput] = useState({
+    id: '',
     question: '',
     video_title: '',
   });
+
   // options array of objects
   const [optionOne, setOptionOne] = useState({
     id: 1,
@@ -33,8 +45,40 @@ export default function AddQuizInfo({ setShowModal }) {
     isCorrect: false,
   });
 
+  // set quiz data using useEffect
+  useEffect(() => {
+    if (selectedVideo?.id) {
+      setInput({
+        id,
+        question,
+        video_title: JSON.stringify(selectedVideo),
+      });
+      setOptionOne({
+        id: options[0].id,
+        option: options[0].option,
+        isCorrect: options[0].isCorrect,
+      });
+      setOptionTwo({
+        id: options[1].id,
+        option: options[1].option,
+        isCorrect: options[1].isCorrect,
+      });
+      setOptionThree({
+        id: options[2].id,
+        option: options[2].option,
+        isCorrect: options[2].isCorrect,
+      });
+      setOptionFour({
+        id: options[3].id,
+        option: options[3].option,
+        isCorrect: options[3].isCorrect,
+      });
+    }
+  }, [selectedVideo, options]);
+
+  console.log(options[0].isCorrect);
   // add a quiz
-  const handleAddQuiz = (e) => {
+  const handleEditQuiz = (e) => {
     e.preventDefault();
     const confirmation = window.confirm('Are you sure you want to add it?');
     if (confirmation) {
@@ -49,7 +93,7 @@ export default function AddQuizInfo({ setShowModal }) {
           optionFour,
         ],
       };
-      addQuiz(data);
+      editQuiz({ id: input.id, data });
     } else {
       return;
     }
@@ -80,7 +124,7 @@ export default function AddQuizInfo({ setShowModal }) {
               </button>
             </div>
             {/* body */}
-            <form onSubmit={handleAddQuiz}>
+            <form onSubmit={handleEditQuiz}>
               <div className="relative p-6 flex-auto">
                 {/* quiz quiestion */}
                 <div className="flex flex-col gap-1 mb-1">
@@ -119,7 +163,7 @@ export default function AddQuizInfo({ setShowModal }) {
                     />
                     <input
                       onChange={(e) => setOptionOne({ ...optionOne, isCorrect: e.target.checked })}
-                      value={optionOne.isCorrect}
+                      checked={optionOne.isCorrect}
                       type="checkbox"
                       name="answer"
                       id="answer"
@@ -143,7 +187,7 @@ export default function AddQuizInfo({ setShowModal }) {
                     />
                     <input
                       onChange={(e) => setOptionTwo({ ...optionTwo, isCorrect: e.target.checked })}
-                      value={optionTwo.isCorrect}
+                      checked={optionTwo.isCorrect}
                       type="checkbox"
                       name="answer"
                       id="answer"
@@ -167,7 +211,7 @@ export default function AddQuizInfo({ setShowModal }) {
                     />
                     <input
                       onChange={(e) => setOptionThree({ ...optionThree, isCorrect: e.target.checked })}
-                      value={optionThree.isCorrect}
+                      checked={optionThree.isCorrect}
                       type="checkbox"
                       name="answer"
                       id="answer"
@@ -191,7 +235,7 @@ export default function AddQuizInfo({ setShowModal }) {
                     />
                     <input
                       onChange={(e) => setOptionFour({ ...optionFour, isCorrect: e.target.checked })}
-                      value={optionFour.isCorrect}
+                      checked={optionFour.isCorrect}
                       type="checkbox"
                       name="answer"
                       id="answer"
@@ -215,7 +259,7 @@ export default function AddQuizInfo({ setShowModal }) {
                   type="submit"
                   className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
                 >
-                  Add
+                  Save
                 </button>
               </div>
             </form>

@@ -139,7 +139,7 @@
       "id": 1,
       "question": "What is a Debounce function in JavaScript?",
       "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
+      "video_title": "#1 Debounce Function in JavaScript - JavaScript Job Interview question",
       "options": [
         {
           "id": 1,
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "question": "what is the efficienct way of handle dom in react?",
+      "question": "What is the efficient way of handle DOM in react?",
       "video_id": 5,
       "video_title": "#4 React Router v6 Private Route Tutorial Sumit Saha",
       "options": [

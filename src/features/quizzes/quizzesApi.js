@@ -43,6 +43,20 @@ export const quizzesApi = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: data,
       }),
+      // pessimistic update
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: updatedQuizData } = await queryFulfilled;
+          dispatch(apiSlice.util.updateQueryData('getQuizzes', undefined, (draft) => {
+            const indexToUpdate = draft?.findIndex((quiz) => quiz.id === id);
+            draft[indexToUpdate] = { ...updatedQuizData };
+          }));
+          // silently update a single video data
+          dispatch(apiSlice.util.updateQueryData('getQuiz', id, (draft) => updatedQuizData));
+        } catch (err) {
+          // console.error(err);
+        }
+      },
     }),
     deleteQuiz: builder.mutation({
       query: (id) => ({
