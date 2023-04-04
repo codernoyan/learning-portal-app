@@ -1,5 +1,5 @@
 import { useGetVideosQuery } from 'features/videos/videosApi';
-import AddVideoModal from './AddVideoModal';
+import AddVideoModal from '../addVideo/AddVideoModal';
 import VideoItem from './VideoItem';
 
 export default function VideosList() {
