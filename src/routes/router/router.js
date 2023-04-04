@@ -31,14 +31,7 @@ export const router = createBrowserRouter([
           </PublicStudent>
         ),
       },
-      // {
-      //   path: '/login',
-      //   element: (
-      //     <PublicStudent>
-      //       <StudentLogin />
-      //     </PublicStudent>
-      //   ),
-      // },
+
       {
         path: '/course',
         element: (
