@@ -102,13 +102,22 @@
       "createdAt": "2023-04-03T14:28:15.116Z"
     },
     {
-      "title": "#4 React Router v6 Private Route Tutorial Sumit Saha",
+      "title": "#5 React Router v6 Private Route Tutorial Sumit Saha",
       "description": "This video will help you to understand what's new in the new version of the react-router-dom step by step.",
       "url": "https://www.youtube.com/embed/99RWZsEITx4",
       "views": "94.4K",
       "duration": "28:30",
-      "createdAt": "2023-04-02T18:04:25.045Z",
+      "createdAt": "2023-04-04T14:59:29.405Z",
       "id": 5
+    },
+    {
+      "title": "#6 Redux কেন প্রয়োজন - Why Redux - A talk with Jhankar Mahbub",
+      "description": "Redux allows you to manage your app's state in a single place and keep changes in your app more predictable and traceable. It makes it easier to reason about changes occurring in your app. But all of these benefits come with tradeoffs and constraints.",
+      "url": "https://www.youtube.com/embed/fuAsjgOp-6U",
+      "views": "20K ",
+      "duration": "50:23",
+      "createdAt": "2023-04-04T15:10:56.359Z",
+      "id": 6
     }
   ],
   "assignments": [
@@ -246,6 +255,34 @@
         }
       ],
       "id": 4
+    },
+    {
+      "question": "What is Redux?",
+      "video_id": 6,
+      "video_title": "#6 Redux কেন প্রয়োজন - Why Redux - A talk with Jhankar Mahbub",
+      "options": [
+        {
+          "id": 1,
+          "option": "Object",
+          "isCorrect": false
+        },
+        {
+          "id": 2,
+          "option": "Framework",
+          "isCorrect": false
+        },
+        {
+          "id": 3,
+          "option": "State management library",
+          "isCorrect": true
+        },
+        {
+          "id": 4,
+          "option": "JavaScript Fetch Library",
+          "isCorrect": false
+        }
+      ],
+      "id": 5
     }
   ],
   "assignmentMark": [
