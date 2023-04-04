@@ -6,7 +6,15 @@ import './App.css';
 function App() {
   const authenticationCheck = useAuthCheck();
   return !authenticationCheck
-    ? <div><h2>Checking Authentication</h2></div>
+    ? (
+      <div className="flex justify-center items-center h-screen">
+        <h2 className="text-xl font-semibold">
+          Checking
+          {' '}
+          <span className="text-cyan-500">Authentication</span>
+        </h2>
+      </div>
+    )
     : <RouterProvider router={router} />;
 }
 

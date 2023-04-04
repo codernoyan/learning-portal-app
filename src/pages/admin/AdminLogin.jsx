@@ -21,11 +21,12 @@ export default function AdminLogin() {
   const handleAdminLogin = (e) => {
     e.preventDefault();
     // console.log(data);
-    const indexOfAdmin = users?.findIndex(({ email }) => email === loginInfo.email);
-    const adminData = users[indexOfAdmin];
+    // const indexOfAdmin = users?.findIndex(({ email }) => email === loginInfo.email);
+    // const adminData = users[indexOfAdmin];
     // if (indexOfAdmin !== -1) {
     // }
     login(loginInfo);
+    // console.log(loginInfo);
     // reset
     setLoginInfo({
       email: '',
@@ -58,12 +59,12 @@ export default function AdminLogin() {
           </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <Link to="/login" className="font-medium text-violet-600 hover:text-violet-500">
+              <Link to="/" className="font-medium text-violet-600 hover:text-violet-500">
                 Student Login
               </Link>
             </div>
             <div className="text-sm">
-              <Link to="/" className="font-medium text-violet-600 hover:text-violet-500">
+              <Link to="/admin/login" className="font-medium text-violet-600 hover:text-violet-500">
                 Forgot your password?
               </Link>
             </div>

@@ -14,6 +14,7 @@ import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from 'routes/privateRoute/PrivateRoute';
+import PublicAdmin from 'routes/publicRoutes/PublicAdmin';
 import PublicStudent from 'routes/publicRoutes/PublicStudent';
 
 export const router = createBrowserRouter([
@@ -30,14 +31,14 @@ export const router = createBrowserRouter([
           </PublicStudent>
         ),
       },
-      {
-        path: '/login',
-        element: (
-          <PublicStudent>
-            <StudentLogin />
-          </PublicStudent>
-        ),
-      },
+      // {
+      //   path: '/login',
+      //   element: (
+      //     <PublicStudent>
+      //       <StudentLogin />
+      //     </PublicStudent>
+      //   ),
+      // },
       {
         path: '/course',
         element: (
@@ -93,8 +94,16 @@ export const router = createBrowserRouter([
     path: '/admin',
     element: <AdminDashboard />,
     children: [
+      // {
+      //   path: '/admin/login',
+      //   element: (
+      //     <PublicAdmin>
+      //       <AdminLogin />
+      //     </PublicAdmin>
+      //   ),
+      // },
       {
-        path: '/admin',
+        path: '/admin/',
         element: <Dashboard />,
       },
       {
@@ -117,6 +126,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/admin/login',
-    element: <AdminLogin />,
+    element: (
+      <PublicAdmin>
+        <AdminLogin />
+      </PublicAdmin>
+    ),
   },
 ]);

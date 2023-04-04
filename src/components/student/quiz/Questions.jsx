@@ -19,7 +19,7 @@ export default function Questions() {
   } else if (!isLoading && isError) {
     content = <Error message={error?.error} />;
   } else if (!isLoading && !isError && quizzes?.length === 0) {
-    content = <Error message="No quizzes found!" />;
+    content = <Error message="No quiz found!" />;
   } else if (!isLoading && !isError && quizzes?.length > 0) {
     content = quizzes?.map((quiz, index) => <Question key={quiz.id} quiz={quiz} index={index} />);
   }
