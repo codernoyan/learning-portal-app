@@ -76,7 +76,6 @@ export default function EditQuizInfo({ quiz, setShowModal }) {
     }
   }, [selectedVideo, options]);
 
-  console.log(options[0].isCorrect);
   // add a quiz
   const handleEditQuiz = (e) => {
     e.preventDefault();
