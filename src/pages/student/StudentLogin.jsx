@@ -1,11 +1,18 @@
 import { useLoginMutation } from 'features/auth/authApi';
-import { useState } from 'react';
+import { selectAuth } from 'features/auth/authSelector';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function StudentLogin() {
+  const [loginError, setLoginError] = useState('');
+  // user check from store
+  const { user } = useSelector(selectAuth);
+
   const navigate = useNavigate();
   const [login, {
-    isLoading, isError, error,
+    data: response,
+    isLoading, isError, isSuccess, error,
   }] = useLoginMutation();
   // user info state
   const [loginInfo, setLoginInfo] = useState({
@@ -16,15 +23,24 @@ export default function StudentLogin() {
   // login handler
   const handleStudentLogin = (e) => {
     e.preventDefault();
-    // console.log(data);
     login(loginInfo);
-    // reset
-    setLoginInfo({
-      email: '',
-      password: '',
-    });
-    navigate('course/videos/1');
   };
+
+  useEffect(() => {
+    if (error?.data) {
+      setLoginError(error?.data);
+    }
+
+    if (isSuccess && user?.id) {
+      // reset
+      setLoginError('');
+      setLoginInfo({
+        email: '',
+        password: '',
+      });
+      navigate('course/videos/1');
+    }
+  }, [response, error, isSuccess, user]);
 
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">
@@ -46,6 +62,7 @@ export default function StudentLogin() {
               <label htmlFor="password" className="sr-only">Password</label>
               <input onChange={(e) => setLoginInfo({ ...loginInfo, password: e.target.value })} id="password" name="password" type="password" autoComplete="current-password" required className="login-input rounded-b-md" placeholder="Password" value={loginInfo.password} />
             </div>
+            {loginError && <h2 className="text-rose-500 mt-4 font-semibold">{loginError}</h2>}
           </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
