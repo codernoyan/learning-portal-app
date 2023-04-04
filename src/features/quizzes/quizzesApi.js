@@ -20,7 +20,22 @@ export const quizzesApi = apiSlice.injectEndpoints({
     addQuiz: builder.mutation({
       query: (data) => ({
         url: '/quizzes',
+        method: 'POST',
+        body: data,
       }),
+      // pessimistic update for add video
+      async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
+        try {
+          const quiz = await queryFulfilled;
+          if (Object.keys(quiz.data).length > 1) {
+            dispatch(apiSlice.util.updateQueryData('getQuizzes', undefined, (draft) => {
+              draft.push(quiz.data);
+            }));
+          }
+        } catch (err) {
+          // console.log(err);
+        }
+      },
     }),
     editQuiz: builder.mutation({
       query: ({ id, data }) => ({

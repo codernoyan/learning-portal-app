@@ -37,7 +37,7 @@ export default function VideoDescription({ video = {} }) {
       </h2>
       <div className="flex gap-4">
         {content}
-        <Link to="/quiz" className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+        <Link to={`/quiz/${id}`} className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
           কুইজে
           অংশগ্রহণ
           করুন

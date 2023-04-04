@@ -1,23 +1,56 @@
 /* eslint-disable no-alert */
+import { useAddQuizMutation } from 'features/quizzes/quizzesApi';
+import { useGetVideosQuery } from 'features/videos/videosApi';
 import { useState } from 'react';
 
 export default function AddQuizInfo({ setShowModal }) {
-  // const [addVideo, { isLoading, isError, error }] = useAddVideoMutation();
-  // video info state
+  const [addQuiz, { isLoading, isError, error }] = useAddQuizMutation();
+  const { data: videos } = useGetVideosQuery();
+  // quiz info state
   const [input, setInput] = useState({
-    title: '',
-    description: '',
-    url: '',
-    views: '',
-    duration: '',
-    createdAt: new Date().toISOString(),
+    question: '',
+    video_title: '',
   });
-  // add a video
-  const handleAddVideo = (e) => {
+  // options array of objects
+  const [optionOne, setOptionOne] = useState({
+    id: 1,
+    option: '',
+    isCorrect: false,
+  });
+  const [optionTwo, setOptionTwo] = useState({
+    id: 2,
+    option: '',
+    isCorrect: false,
+  });
+  const [optionThree, setOptionThree] = useState({
+    id: 3,
+    option: '',
+    isCorrect: false,
+  });
+  const [optionFour, setOptionFour] = useState({
+    id: 4,
+    option: '',
+    isCorrect: false,
+  });
+
+  // add a quiz
+  const handleAddQuiz = (e) => {
     e.preventDefault();
     const confirmation = window.confirm('Are you sure you want to add it?');
     if (confirmation) {
-      // addVideo(input);
+      const data = {
+        question: input.question,
+        video_id: JSON.parse(input.video_title).id,
+        video_title: JSON.parse(input.video_title).title,
+        options: [
+          optionOne,
+          optionTwo,
+          optionThree,
+          optionFour,
+        ],
+      };
+      addQuiz(data);
+      console.log(data);
     } else {
       return;
     }
@@ -27,7 +60,7 @@ export default function AddQuizInfo({ setShowModal }) {
   return (
     <>
       <div
-        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none backdrop-blur-sm"
       >
         <div className="relative w-full my-6 mx-auto max-w-3xl">
           {/* content */}
@@ -35,7 +68,7 @@ export default function AddQuizInfo({ setShowModal }) {
             {/* header */}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
               <h3 className="text-2xl font-semibold text-black">
-                Add Video
+                Add Quiz
               </h3>
               <button
                 type="button"
@@ -48,35 +81,124 @@ export default function AddQuizInfo({ setShowModal }) {
               </button>
             </div>
             {/* body */}
-            <form onSubmit={handleAddVideo}>
+            <form onSubmit={handleAddQuiz}>
               <div className="relative p-6 flex-auto">
-                {/* title */}
+                {/* quiz quiestion */}
                 <div className="flex flex-col gap-1 mb-1">
-                  <label htmlFor="assignment" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Title</label>
-                  <input onChange={(e) => setInput({ ...input, title: e.target.value })} value={input.title} id="assignment" type="text" name="title" className="border border-black p-2 text-black" placeholder="Ex: https://github.com/learning-portal-lws" required />
+                  <label htmlFor="quiz" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Quiz Title</label>
+                  <input onChange={(e) => setInput({ ...input, question: e.target.value })} value={input.question} id="quiz" type="text" name="title" className="border border-black p-2 text-black" placeholder="Ex: What is the differences between null and undefinded" required />
                 </div>
-                {/* url */}
-                <div className="flex flex-col gap-1 mb-1">
-                  <label htmlFor="url" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video URL</label>
-                  <input onChange={(e) => setInput({ ...input, url: e.target.value })} value={input.url} id="url" type="text" name="url" className="border border-black p-2 text-black" placeholder="Ex: https://youtu.be/99RWZsEITx4" required />
+                {/* video title */}
+                <div className="flex flex-col gap-1 flex-grow">
+                  <label htmlFor="video_title" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video Title</label>
+                  <select
+                    onChange={(e) => setInput({ ...input, video_title: e.target.value })}
+                    value={input.video_title}
+                    name="video"
+                    id="video_title"
+                    className="border border-black p-2 text-black"
+                  >
+                    <option hidden defaultValue>Select a video</option>
+                    {
+                      videos?.map((video) => <option key={video?.id} value={JSON.stringify(video)}>{video?.title}</option>)
+                    }
+                  </select>
                 </div>
-                {/* views and duration */}
-                <div className="columns-xs mb-1">
-                  {/* views */}
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="views" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Views</label>
-                    <input onChange={(e) => setInput({ ...input, views: e.target.value })} value={input.views} id="views" type="text" name="views" className="border border-black p-2 text-black" placeholder="Ex: 4.4K" required />
+                {/* option one */}
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="one" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option One</label>
+                  <div className="flex gap-4 items-center">
+                    <input
+                      onChange={(e) => setOptionOne({ ...optionOne, option: e.target.value })}
+                      value={optionOne.option}
+                      id="one"
+                      type="text"
+                      name="one"
+                      className="border border-black p-2 text-black flex-grow"
+                      placeholder="Ex: 44.26"
+                      required
+                    />
+                    <input
+                      onChange={(e) => setOptionOne({ ...optionOne, isCorrect: e.target.checked })}
+                      value={optionOne.isCorrect}
+                      type="checkbox"
+                      name="answer"
+                      id="answer"
+                      className="accent-cyan-300 focus:accent-cyan-500 w-6 h-6 cursor-pointer"
+                    />
                   </div>
-                  {/* duration */}
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="duration" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Duration</label>
-                    <input onChange={(e) => setInput({ ...input, duration: e.target.value })} value={input.duration} id="duration" type="text" name="duration" className="border border-black p-2 text-black" placeholder="Ex: 44.26" required />
+                </div>
+                {/* option two */}
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="two" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Two</label>
+                  <div className="flex gap-4 items-center">
+                    <input
+                      onChange={(e) => setOptionTwo({ ...optionTwo, option: e.target.value })}
+                      value={optionTwo.option}
+                      id="one"
+                      type="text"
+                      name="one"
+                      className="border border-black p-2 text-black flex-grow"
+                      placeholder="Ex: 44.26"
+                      required
+                    />
+                    <input
+                      onChange={(e) => setOptionTwo({ ...optionTwo, isCorrect: e.target.checked })}
+                      value={optionTwo.isCorrect}
+                      type="checkbox"
+                      name="answer"
+                      id="answer"
+                      className="accent-cyan-300 focus:accent-cyan-500 w-6 h-6 cursor-pointer"
+                    />
                   </div>
                 </div>
-                {/* description */}
-                <div className="flex flex-col gap-1 mb-1">
-                  <label htmlFor="description" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Description</label>
-                  <textarea onChange={(e) => setInput({ ...input, description: e.target.value })} value={input.description} name="description" id="description" cols={10} rows={2} className="border border-black p-2 text-black" placeholder="write description here..." />
+                {/* option three */}
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="three" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Three</label>
+                  <div className="flex gap-4 items-center">
+                    <input
+                      onChange={(e) => setOptionThree({ ...optionThree, option: e.target.value })}
+                      value={optionThree.option}
+                      id="one"
+                      type="text"
+                      name="one"
+                      className="border border-black p-2 text-black flex-grow"
+                      placeholder="Ex: 44.26"
+                      required
+                    />
+                    <input
+                      onChange={(e) => setOptionThree({ ...optionThree, isCorrect: e.target.checked })}
+                      value={optionThree.isCorrect}
+                      type="checkbox"
+                      name="answer"
+                      id="answer"
+                      className="accent-cyan-300 focus:accent-cyan-500 w-6 h-6 cursor-pointer"
+                    />
+                  </div>
+                </div>
+                {/* option four */}
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="four" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Four</label>
+                  <div className="flex gap-4 items-center">
+                    <input
+                      onChange={(e) => setOptionFour({ ...optionFour, option: e.target.value })}
+                      value={optionFour.option}
+                      id="one"
+                      type="text"
+                      name="one"
+                      className="border border-black p-2 text-black flex-grow"
+                      placeholder="Ex: 44.26"
+                      required
+                    />
+                    <input
+                      onChange={(e) => setOptionFour({ ...optionFour, isCorrect: e.target.checked })}
+                      value={optionFour.isCorrect}
+                      type="checkbox"
+                      name="answer"
+                      id="answer"
+                      className="accent-cyan-300 focus:accent-cyan-500 w-6 h-6 cursor-pointer"
+                    />
+                  </div>
                 </div>
               </div>
               {/* buttons */}

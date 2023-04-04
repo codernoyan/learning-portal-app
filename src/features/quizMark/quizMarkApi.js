@@ -12,6 +12,13 @@ export const quizMarkApi = apiSlice.injectEndpoints({
         url: `/quizMark?student_id_like=${studentId}`,
       }),
     }),
+    addQuizMark: builder.mutation({
+      query: (data) => ({
+        url: '/quizMark',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 

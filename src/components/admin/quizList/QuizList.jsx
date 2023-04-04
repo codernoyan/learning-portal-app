@@ -19,9 +19,6 @@ export default function QuizList() {
   }
   return (
     <div className="px-3 py-20 bg-opacity-10">
-      {/* <div className="w-full flex">
-        <button type="button" className="btn ml-auto">Add Quiz</button>
-      </div> */}
       <AddQuizModal />
       <div className="overflow-x-auto mt-4">
         <table className="divide-y-1 text-base divide-gray-600 w-full">

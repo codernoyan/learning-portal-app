@@ -142,12 +142,12 @@
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
       "options": [
         {
-          "id": "1",
+          "id": 1,
           "option": "A function that is called after a certain time interval",
           "isCorrect": true
         },
         {
-          "id": "2",
+          "id": 2,
           "option": "A function that is called after a certain time interval",
           "isCorrect": false
         },
@@ -170,12 +170,12 @@
       "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
       "options": [
         {
-          "id": "1",
+          "id": 1,
           "option": "A search bar where the results are displayed as you type.",
           "isCorrect": true
         },
         {
-          "id": "2",
+          "id": 2,
           "option": "A button that performs an action when clicked.",
           "isCorrect": false
         },
@@ -218,6 +218,34 @@
           "isCorrect": false
         }
       ]
+    },
+    {
+      "question": "what is the efficienct way of handle dom in react?",
+      "video_id": 5,
+      "video_title": "#4 React Router v6 Private Route Tutorial Sumit Saha",
+      "options": [
+        {
+          "id": 1,
+          "option": "Virtual DOM",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "option": "Original DOM",
+          "isCorrect": false
+        },
+        {
+          "id": 3,
+          "option": "Node",
+          "isCorrect": false
+        },
+        {
+          "id": 4,
+          "option": "HTMLCollection",
+          "isCorrect": false
+        }
+      ],
+      "id": 4
     }
   ],
   "assignmentMark": [
@@ -276,9 +304,9 @@
       "title": "Assignment 3 - Create a simplified version of LWS",
       "createdAt": "2023-04-03T07:35:38.923Z",
       "totalMark": 100,
-      "mark": 0,
+      "mark": 100,
       "repo_link": "https://github.com/codernoyan/redux-intro",
-      "status": "pending",
+      "status": "published",
       "id": 5
     },
     {
