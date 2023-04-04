@@ -25,6 +25,11 @@ export default function AdminLogin() {
   // login handler
   const handleAdminLogin = (e) => {
     e.preventDefault();
+    if (loginInfo.email !== 'admin@learnwithsumit.com') {
+      setLoginError('Admin email does not match');
+      return;
+    }
+    setLoginError('');
     login(loginInfo);
   };
 

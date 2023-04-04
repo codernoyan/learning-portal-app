@@ -23,6 +23,11 @@ export default function StudentLogin() {
   // login handler
   const handleStudentLogin = (e) => {
     e.preventDefault();
+    if (loginInfo.email === 'admin@learnwithsumit.com') {
+      setLoginError('Student email does not match');
+      return;
+    }
+    setLoginError('');
     login(loginInfo);
   };
 
