@@ -27,7 +27,7 @@ export default function NotFound() {
           <em>{error.statusText || error.message}</em>
         </p>
         <button onClick={handleNavigate} type="button" className="inline-block px-5 py-3 mt-6 text-sm font-medium text-white bg-cyan-600 rounded hover:bg-cyan-700 focus:ring">
-          Go Back Home
+          Go Back
         </button>
       </div>
     </div>
