@@ -1,15 +1,18 @@
 import { useLoginMutation } from 'features/auth/authApi';
 import { selectAuth } from 'features/auth/authSelector';
-import { useGetAdminInfoQuery, useGetUsersQuery } from 'features/users/usersApi';
+import { useGetAdminInfoQuery } from 'features/users/usersApi';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
   const [loginError, setLoginError] = useState('');
   // user check from store
   const { user } = useSelector(selectAuth);
-  const { data: users } = useGetUsersQuery();
+  // get location data
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || '/admin';
+  console.log(location);
   const [login, {
     data: response,
     isLoading, isError, isSuccess, error,
@@ -47,7 +50,8 @@ export default function AdminLogin() {
         email: '',
         password: '',
       });
-      navigate('/admin');
+      // navigate('/admin');
+      navigate(from, { replace: true });
     }
   }, [response, error, isSuccess, user]);
 

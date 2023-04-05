@@ -3,13 +3,17 @@ import { selectAuth } from 'features/auth/authSelector';
 import { useGetAdminInfoQuery } from 'features/users/usersApi';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function StudentLogin() {
   const [loginError, setLoginError] = useState('');
   // user check from store
   const { user } = useSelector(selectAuth);
 
+  // get location data
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || '/course/videos/1';
+  console.log(from);
   const navigate = useNavigate();
   const [login, {
     data: response,
@@ -50,7 +54,8 @@ export default function StudentLogin() {
         email: '',
         password: '',
       });
-      navigate('course/videos/1');
+      // navigate('course/videos/1');
+      navigate(from, { replace: true });
     }
   }, [response, error, isSuccess, user]);
 

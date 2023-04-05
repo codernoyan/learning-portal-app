@@ -13,7 +13,8 @@ import Quiz from 'pages/student/Quiz';
 import StudentLogin from 'pages/student/StudentLogin';
 import StudentRegistration from 'pages/student/StudentRegistration';
 import { createBrowserRouter } from 'react-router-dom';
-import PrivateRoute from 'routes/privateRoute/PrivateRoute';
+import AdminRoute from 'routes/privateRoute/AdminRoute';
+import StudentRoute from 'routes/privateRoute/StudentRoute';
 import PublicAdmin from 'routes/publicRoutes/PublicAdmin';
 import PublicStudent from 'routes/publicRoutes/PublicStudent';
 
@@ -35,17 +36,17 @@ export const router = createBrowserRouter([
       {
         path: '/course',
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <Course />
-          </PrivateRoute>
+          </StudentRoute>
         ),
         children: [
           {
             path: '/course/videos/:videoId',
             element: (
-              <PrivateRoute>
+              <StudentRoute>
                 <Video />
-              </PrivateRoute>
+              </StudentRoute>
             ),
           },
         ],
@@ -53,17 +54,17 @@ export const router = createBrowserRouter([
       {
         path: 'leaderboard',
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <Leaderboard />
-          </PrivateRoute>
+          </StudentRoute>
         ),
       },
       {
         path: '/quiz/:videoId',
         element: (
-          <PrivateRoute>
+          <StudentRoute>
             <Quiz />
-          </PrivateRoute>
+          </StudentRoute>
         ),
       },
     ],
@@ -85,7 +86,11 @@ export const router = createBrowserRouter([
   // admin dashboard route
   {
     path: '/admin',
-    element: <AdminDashboard />,
+    element: (
+      <AdminRoute>
+        <AdminDashboard />
+      </AdminRoute>
+    ),
     children: [
       // {
       //   path: '/admin/login',
@@ -97,23 +102,43 @@ export const router = createBrowserRouter([
       // },
       {
         path: '/admin/',
-        element: <Dashboard />,
+        element: (
+          <AdminRoute>
+            <Dashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: '/admin/assignment',
-        element: <Assginment />,
+        element: (
+          <AdminRoute>
+            <Assginment />
+          </AdminRoute>
+        ),
       },
       {
         path: '/admin/assignmentMark',
-        element: <AssignmentMark />,
+        element: (
+          <AdminRoute>
+            <AssignmentMark />
+          </AdminRoute>
+        ),
       },
       {
         path: '/admin/quizzes',
-        element: <Quizzes />,
+        element: (
+          <AdminRoute>
+            <Quizzes />
+          </AdminRoute>
+        ),
       },
       {
         path: '/admin/videos',
-        element: <Videos />,
+        element: (
+          <AdminRoute>
+            <Videos />
+          </AdminRoute>
+        ),
       },
     ],
   },
