@@ -2,6 +2,7 @@ import Video from 'components/student/video/Video';
 import AdminDashboard from 'layouts/AdminDashboard';
 import Course from 'layouts/Course';
 import Main from 'layouts/Main';
+import NotFound from 'pages/NotFound/NotFound';
 import AdminLogin from 'pages/admin/AdminLogin';
 import Assginment from 'pages/admin/Assignment';
 import AssignmentMark from 'pages/admin/AssignmentMark';
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
@@ -91,15 +93,8 @@ export const router = createBrowserRouter([
         <AdminDashboard />
       </AdminRoute>
     ),
+    errorElement: <NotFound />,
     children: [
-      // {
-      //   path: '/admin/login',
-      //   element: (
-      //     <PublicAdmin>
-      //       <AdminLogin />
-      //     </PublicAdmin>
-      //   ),
-      // },
       {
         path: '/admin/',
         element: (

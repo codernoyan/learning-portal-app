@@ -12,7 +12,6 @@ export default function AdminLogin() {
   // get location data
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/admin';
-  console.log(location);
   const [login, {
     data: response,
     isLoading, isError, isSuccess, error,

@@ -13,7 +13,6 @@ export default function StudentLogin() {
   // get location data
   const location = useLocation();
   const from = location?.state?.from?.pathname || '/course/videos/1';
-  console.log(from);
   const navigate = useNavigate();
   const [login, {
     data: response,
