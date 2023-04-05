@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useDeleteAssignmentMutation, useGetAssignmentByVideoIdQuery } from 'features/assignments/assignmentsApi';
 import { useDeleteVideoMutation } from 'features/videos/videosApi';
 import EditVideoModal from '../editVideo/EditVideoModal';

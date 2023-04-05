@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { useGetAssigmentMarksQuery } from 'features/assignmentMarks/assignmentMarksApi';
 import { useGetQuizMarksQuery } from 'features/quizMark/quizMarkApi';
 import { useGetUsersQuery } from 'features/users/usersApi';
@@ -28,6 +29,36 @@ export default function RankedStudents() {
     };
   });
 
+  // provide same index number when mark is matched with others
+  // let newIndex = 0;
+  const gropuedArray = newModifedArray?.reduce((acc, current) => {
+    if (!acc[current.totalMark]) {
+      acc[current.totalMark] = [];
+    }
+    acc[current.totalMark].push(current);
+    return acc;
+  }, {});
+
+  // const newIndexedArray = Object.values(gropuedArray).map((group) => {
+  //   const r = group.map((obj) => {
+  //     obj.index = newIndex;
+  //     return obj;
+  //   });
+  //   newIndex++;
+  //   return r;
+  // }).flat();
+
+  // if (!isLoading) {
+  //   const newIndexedArray = Object.values(gropuedArray).map((group) => {
+  //     const r = group.map((obj) => {
+  //       obj.index = newIndex;
+  //       return obj;
+  //     });
+  //     newIndex++;
+  //     return r;
+  //   }).flat();
+  //   console.log(newIndexedArray);
+  // }
   // sort ranking
   const sortByTotalMark = (a, b) => b.totalMark - a.totalMark;
 
@@ -39,10 +70,18 @@ export default function RankedStudents() {
   } else if (!isLoading && !isError && newModifedArray?.length === 0) {
     content = <tr><td>No student found!</td></tr>;
   } else if (!isLoading && !isError && newModifedArray?.length > 0) {
-    content = newModifedArray.sort(sortByTotalMark).map((user, index) => <RankedStudent key={user.id} user={user} index={index} />);
+    // create a new array with new index
+    let newIndex = 0;
+    const newIndexedArray = Object.values(gropuedArray).reverse().map((group) => {
+      const r = group.map((obj) => {
+        obj.index = newIndex;
+        return obj;
+      });
+      newIndex++;
+      return r;
+    }).flat();
+    content = newIndexedArray.slice(0, 20).map((user) => <RankedStudent key={user.id} user={user} />);
   }
-
-  // console.log(newModifedArray);
 
   return (
     <div className="my-8">

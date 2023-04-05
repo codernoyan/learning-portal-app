@@ -1,6 +1,6 @@
-export default function RankedStudent({ user, index }) {
+export default function RankedStudent({ user }) {
   const {
-    id, name, totalAssignmentMark, totalQuizMark, totalMark,
+    id, name, totalAssignmentMark, totalQuizMark, totalMark, index,
   } = user || {};
 
   return (
