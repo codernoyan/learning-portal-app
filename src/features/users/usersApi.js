@@ -7,6 +7,11 @@ export const usersApi = apiSlice.injectEndpoints({
         url: '/users?role_ne=admin',
       }),
     }),
+    getAdminInfo: builder.query({
+      query: () => ({
+        url: '/users?role_like=admin',
+      }),
+    }),
     getUser: builder.query({
       query: (email) => ({
         url: `/users/${email}`,
@@ -15,4 +20,4 @@ export const usersApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery, useGetUserQuery } = usersApi;
+export const { useGetUsersQuery, useGetUserQuery, useGetAdminInfoQuery } = usersApi;

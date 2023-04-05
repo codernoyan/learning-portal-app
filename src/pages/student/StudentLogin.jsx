@@ -1,5 +1,6 @@
 import { useLoginMutation } from 'features/auth/authApi';
 import { selectAuth } from 'features/auth/authSelector';
+import { useGetAdminInfoQuery } from 'features/users/usersApi';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,16 +15,22 @@ export default function StudentLogin() {
     data: response,
     isLoading, isError, isSuccess, error,
   }] = useLoginMutation();
+
+  // get admin data
+  const { data: adminInfo } = useGetAdminInfoQuery();
+
   // user info state
   const [loginInfo, setLoginInfo] = useState({
     email: '',
     password: '',
   });
 
+  // console.log(adminInfo?.[0].email);
+
   // login handler
   const handleStudentLogin = (e) => {
     e.preventDefault();
-    if (loginInfo.email === 'admin@learnwithsumit.com') {
+    if (loginInfo.email === adminInfo?.[0]?.email) {
       setLoginError('Student email does not match');
       return;
     }
