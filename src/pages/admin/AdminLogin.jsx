@@ -52,7 +52,7 @@ export default function AdminLogin() {
       // navigate('/admin');
       navigate(from, { replace: true });
     }
-  }, [response, error, isSuccess, user]);
+  }, [navigate, from, error, isSuccess, user]);
 
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">

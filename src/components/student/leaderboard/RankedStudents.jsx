@@ -24,7 +24,6 @@ export default function RankedStudents() {
       name: user?.name,
       totalAssignmentMark: assignmentMark || 0,
       totalQuizMark: quizMark || 0,
-      totalMark: assignmentMark || 0 + quizMark || 0,
     };
   });
   // console.log(newModifedArray);
@@ -51,13 +50,13 @@ export default function RankedStudents() {
     // create a new array with new index
     let newIndex = 0;
     const newIndexedArray = Object.values(gropuedArray).reverse().map((group) => {
-      const r = group.map((obj) => {
+      const finalArray = group.map((obj) => {
         obj.index = newIndex;
         obj.totalMark = obj.totalQuizMark + obj.totalAssignmentMark;
         return obj;
       });
       newIndex++;
-      return r;
+      return finalArray;
     }).flat();
     content = newIndexedArray.slice(0, 20).map((user) => <RankedStudent key={user.id} user={user} />);
   }
