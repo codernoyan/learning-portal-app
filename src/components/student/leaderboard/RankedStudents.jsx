@@ -1,10 +1,13 @@
 /* eslint-disable no-plusplus */
 import { useGetAssigmentMarksQuery } from 'features/assignmentMarks/assignmentMarksApi';
+import { selectAuth } from 'features/auth/authSelector';
 import { useGetQuizMarksQuery } from 'features/quizMark/quizMarkApi';
 import { useGetUsersQuery } from 'features/users/usersApi';
+import { useSelector } from 'react-redux';
 import RankedStudent from './RankedStudent';
 
 export default function RankedStudents() {
+  const { user: { id } } = useSelector(selectAuth);
   const {
     data: users, isLoading, isError, error,
   } = useGetUsersQuery();
@@ -39,6 +42,7 @@ export default function RankedStudents() {
     return acc;
   }, {});
 
+  let info = null;
   let content = null;
   if (isLoading) {
     content = <tr><td>Loading....</td></tr>;
@@ -59,6 +63,7 @@ export default function RankedStudents() {
       return finalArray;
     }).flat();
     content = newIndexedArray.slice(0, 20).map((user) => <RankedStudent key={user.id} user={user} />);
+    info = newIndexedArray?.find((loggedInUser) => loggedInUser?.id === id);
   }
 
   return (

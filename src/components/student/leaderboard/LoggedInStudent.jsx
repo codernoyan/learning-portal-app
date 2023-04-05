@@ -3,7 +3,7 @@ import { selectAuth } from 'features/auth/authSelector';
 import { useGetQuizMarkQuery } from 'features/quizMark/quizMarkApi';
 import { useSelector } from 'react-redux';
 
-export default function LoggedInStudent() {
+export default function LoggedInStudent({ info }) {
   // get logged in student's info
   const { user: { id, name } } = useSelector(selectAuth) || {};
 
@@ -15,17 +15,20 @@ export default function LoggedInStudent() {
   // get logged in student's quiz mark
   const { data: quizmarks, isLoading: quizMarkLoading } = useGetQuizMarkQuery(id);
 
+  // get student data
   // sum of assignment mark
   const sumOfAssignmentMark = assignmentMarks?.reduce((prev, curr) => prev + curr.mark, 0);
   const sumOfQuizMark = quizmarks?.reduce((prev, curr) => prev + curr.mark, 0);
 
   // total mark calculation
   let totalMark = 0;
-
+  let index = 0;
   if (assignmentMarkLoading && quizMarkLoading) {
     totalMark = 'Loading';
+    index = 'Loading';
   } else if (!assignmentMarkLoading && !quizMarkLoading) {
     totalMark = sumOfAssignmentMark + sumOfQuizMark;
+    index = (info?.index || 0) + 1;
   }
 
   return (
@@ -43,7 +46,7 @@ export default function LoggedInStudent() {
         </thead>
         <tbody>
           <tr className="border-2 border-cyan">
-            <td className="table-td text-center font-bold">4</td>
+            <td className="table-td text-center font-bold">{index}</td>
             <td className="table-td text-center font-bold">{name}</td>
             <td className="table-td text-center font-bold">{quizMarkLoading ? 'Loading' : sumOfQuizMark}</td>
             <td className="table-td text-center font-bold">{assignmentMarkLoading ? 'Loading' : sumOfAssignmentMark}</td>
