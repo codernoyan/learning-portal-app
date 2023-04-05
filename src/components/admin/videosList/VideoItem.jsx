@@ -1,12 +1,21 @@
+import { useDeleteAssignmentMutation, useGetAssignmentByVideoIdQuery } from 'features/assignments/assignmentsApi';
 import { useDeleteVideoMutation } from 'features/videos/videosApi';
 import EditVideoModal from '../editVideo/EditVideoModal';
 
 export default function VideoItem({ video, index }) {
   const { id, title, description } = video || {};
   const [deleteVideo, { isLoading, isError, error }] = useDeleteVideoMutation();
+  const { data: assignment } = useGetAssignmentByVideoIdQuery(id);
+
+  const [deleteAssignment] = useDeleteAssignmentMutation();
 
   const handleDelete = () => {
+    const confirmation = window.confirm('Are you sure you want to delete?');
+    if (!confirmation) {
+      return;
+    }
     deleteVideo(id);
+    deleteAssignment(assignment?.[0]?.id);
   };
 
   return (

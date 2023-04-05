@@ -141,6 +141,13 @@
       "video_title": "#3 Facing the Future: The Truth About Artificial Intelligence and Our Jobs - Bangla",
       "totalMark": 100,
       "id": 3
+    },
+    {
+      "title": "Build a Task Manager application",
+      "video_id": 6,
+      "video_title": "#6 Redux কেন প্রয়োজন - Why Redux - A talk with Jhankar Mahbub",
+      "totalMark": 100,
+      "id": 4
     }
   ],
   "quizzes": [
@@ -357,6 +364,18 @@
       "repo_link": "https://github.com/codernoyan/redux-intro",
       "status": "pending",
       "id": 6
+    },
+    {
+      "student_id": 5,
+      "student_name": "Ferdous",
+      "assignment_id": 4,
+      "title": "Build a Task Manager application",
+      "createdAt": "2023-04-05T14:26:19.133Z",
+      "totalMark": 100,
+      "mark": 100,
+      "repo_link": "https://github.com/codernoyan/redux-intro",
+      "status": "published",
+      "id": 7
     }
   ],
   "quizMark": [

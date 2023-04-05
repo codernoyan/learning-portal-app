@@ -125,7 +125,7 @@ export default function EditAssignmentInfo({ assignment, setShowModal }) {
                   type="submit"
                   className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
                 >
-                  Add
+                  Save
                 </button>
               </div>
             </form>

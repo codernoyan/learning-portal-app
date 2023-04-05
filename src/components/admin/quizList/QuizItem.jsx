@@ -7,6 +7,10 @@ export default function Quizitem({ quiz, index }) {
   const [deleteQuiz, { isLoading, isError, error }] = useDeleteQuizMutation();
   // delete quiz
   const handleDeleteQuiz = () => {
+    const confirmation = window.confirm('Are you sure you want to delete?');
+    if (!confirmation) {
+      return;
+    }
     deleteQuiz(id);
   };
 

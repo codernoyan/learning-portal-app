@@ -10,6 +10,10 @@ export default function AssignmentItem({ assignment, index }) {
 
   // delete assignment
   const handleDeleteAssignment = () => {
+    const confirmation = window.confirm('Are you sure you want to delete?');
+    if (!confirmation) {
+      return;
+    }
     deleteAssignment(id);
   };
 
