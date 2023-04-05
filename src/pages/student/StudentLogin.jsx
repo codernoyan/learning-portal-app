@@ -56,7 +56,7 @@ export default function StudentLogin() {
       // navigate('course/videos/1');
       navigate(from, { replace: true });
     }
-  }, [response, error, isSuccess, user]);
+  }, [navigate, error, isSuccess, user, from]);
 
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">

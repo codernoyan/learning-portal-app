@@ -7,6 +7,7 @@ export default function StudentRoute({ children }) {
   const { user } = useSelector(selectAuth);
   const location = useLocation();
   const dispatch = useDispatch();
+  // check if route is not available
   const match = useMatch('/course');
 
   if (user?.role === 'student' && !match) {

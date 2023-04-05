@@ -9,16 +9,15 @@ export default function RankedStudents() {
     data: users, isLoading, isError, error,
   } = useGetUsersQuery();
   const { data: assignmentMarks } = useGetAssigmentMarksQuery();
-  const { data: quizMarks } = useGetQuizMarksQuery();
+  const { data: quizMarks, isLoading: quizLoading } = useGetQuizMarksQuery();
 
-  // testing code
+  // working code
   const newModifedArray = users?.map((user) => {
     const newAssignmentMarks = assignmentMarks?.filter((assignment) => assignment?.student_id === user?.id);
     const newQuizMarks = quizMarks?.filter((quiz) => quiz?.student_id === user?.id);
     // reduce marks
     const assignmentMark = newAssignmentMarks?.reduce((prev, curr) => prev + curr.mark, 0);
     const quizMark = newQuizMarks?.reduce((prev, curr) => prev + curr.mark, 0);
-
     // return a new array
     return {
       id: user?.id,
@@ -28,39 +27,18 @@ export default function RankedStudents() {
       totalMark: assignmentMark || 0 + quizMark || 0,
     };
   });
+  // console.log(newModifedArray);
 
   // provide same index number when mark is matched with others
   // let newIndex = 0;
   const gropuedArray = newModifedArray?.reduce((acc, current) => {
-    if (!acc[current.totalMark]) {
-      acc[current.totalMark] = [];
+    const sum = current.totalQuizMark + current.totalAssignmentMark;
+    if (!acc[sum]) {
+      acc[sum] = [];
     }
-    acc[current.totalMark].push(current);
+    acc[sum].push(current);
     return acc;
   }, {});
-
-  // const newIndexedArray = Object.values(gropuedArray).map((group) => {
-  //   const r = group.map((obj) => {
-  //     obj.index = newIndex;
-  //     return obj;
-  //   });
-  //   newIndex++;
-  //   return r;
-  // }).flat();
-
-  // if (!isLoading) {
-  //   const newIndexedArray = Object.values(gropuedArray).map((group) => {
-  //     const r = group.map((obj) => {
-  //       obj.index = newIndex;
-  //       return obj;
-  //     });
-  //     newIndex++;
-  //     return r;
-  //   }).flat();
-  //   console.log(newIndexedArray);
-  // }
-  // sort ranking
-  const sortByTotalMark = (a, b) => b.totalMark - a.totalMark;
 
   let content = null;
   if (isLoading) {
@@ -75,6 +53,7 @@ export default function RankedStudents() {
     const newIndexedArray = Object.values(gropuedArray).reverse().map((group) => {
       const r = group.map((obj) => {
         obj.index = newIndex;
+        obj.totalMark = obj.totalQuizMark + obj.totalAssignmentMark;
         return obj;
       });
       newIndex++;
