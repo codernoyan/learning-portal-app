@@ -63,18 +63,20 @@ export default function AddQuizInfo({ setShowModal }) {
       >
         <div className="relative w-full my-6 mx-auto max-w-3xl">
           {/* content */}
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-900 outline-none focus:outline-none">
             {/* header */}
-            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-2xl font-semibold text-black">
-                Add Quiz
+            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-900 rounded-t">
+              <h3 className="text-2xl font-semibold text-white">
+                Add
+                {' '}
+                <span className="text-cyan-500">Quiz</span>
               </h3>
               <button
                 type="button"
-                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                className="p-1 ml-auto bg-transparent border-0 text-white opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
               >
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <span className="bg-transparent text-white opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                   ×
                 </span>
               </button>
@@ -84,18 +86,18 @@ export default function AddQuizInfo({ setShowModal }) {
               <div className="relative p-6 flex-auto">
                 {/* quiz quiestion */}
                 <div className="flex flex-col gap-1 mb-1">
-                  <label htmlFor="quiz" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Quiz Title</label>
-                  <input onChange={(e) => setInput({ ...input, question: e.target.value })} value={input.question} id="quiz" type="text" name="title" className="border border-black p-2 text-black" placeholder="Ex: What is the differences between null and undefinded" required />
+                  <label htmlFor="quiz" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Quiz Question</label>
+                  <input onChange={(e) => setInput({ ...input, question: e.target.value })} value={input.question} id="quiz" type="text" name="title" className="border border-black p-2 bg-slate-700 text-white" placeholder="Ex: What is the differences between null and undefinded" required />
                 </div>
                 {/* video title */}
                 <div className="flex flex-col gap-1 flex-grow">
-                  <label htmlFor="video_title" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video Title</label>
+                  <label htmlFor="video_title" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Video Title</label>
                   <select
                     onChange={(e) => setInput({ ...input, video_title: e.target.value })}
                     value={input.video_title}
                     name="video"
                     id="video_title"
-                    className="border border-black p-2 text-black"
+                    className="border border-black p-2 bg-slate-700 text-white"
                   >
                     <option hidden defaultValue>Select a video</option>
                     {
@@ -105,7 +107,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 </div>
                 {/* option one */}
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="one" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option One</label>
+                  <label htmlFor="one" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option One</label>
                   <div className="flex gap-4 items-center">
                     <input
                       onChange={(e) => setOptionOne({ ...optionOne, option: e.target.value })}
@@ -113,7 +115,7 @@ export default function AddQuizInfo({ setShowModal }) {
                       id="one"
                       type="text"
                       name="one"
-                      className="border border-black p-2 text-black flex-grow"
+                      className="border border-black p-2 bg-slate-700 text-white flex-grow"
                       placeholder="Ex: 44.26"
                       required
                     />
@@ -129,7 +131,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 </div>
                 {/* option two */}
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="two" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Two</label>
+                  <label htmlFor="two" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Two</label>
                   <div className="flex gap-4 items-center">
                     <input
                       onChange={(e) => setOptionTwo({ ...optionTwo, option: e.target.value })}
@@ -137,7 +139,7 @@ export default function AddQuizInfo({ setShowModal }) {
                       id="one"
                       type="text"
                       name="one"
-                      className="border border-black p-2 text-black flex-grow"
+                      className="border border-black p-2 bg-slate-700 text-white flex-grow"
                       placeholder="Ex: 44.26"
                       required
                     />
@@ -153,7 +155,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 </div>
                 {/* option three */}
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="three" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Three</label>
+                  <label htmlFor="three" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Three</label>
                   <div className="flex gap-4 items-center">
                     <input
                       onChange={(e) => setOptionThree({ ...optionThree, option: e.target.value })}
@@ -161,7 +163,7 @@ export default function AddQuizInfo({ setShowModal }) {
                       id="one"
                       type="text"
                       name="one"
-                      className="border border-black p-2 text-black flex-grow"
+                      className="border border-black p-2 bg-slate-700 text-white flex-grow"
                       placeholder="Ex: 44.26"
                       required
                     />
@@ -177,7 +179,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 </div>
                 {/* option four */}
                 <div className="flex flex-col gap-1">
-                  <label htmlFor="four" className="text-black font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Four</label>
+                  <label htmlFor="four" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Option Four</label>
                   <div className="flex gap-4 items-center">
                     <input
                       onChange={(e) => setOptionFour({ ...optionFour, option: e.target.value })}
@@ -185,7 +187,7 @@ export default function AddQuizInfo({ setShowModal }) {
                       id="one"
                       type="text"
                       name="one"
-                      className="border border-black p-2 text-black flex-grow"
+                      className="border border-black p-2 bg-slate-700 text-white flex-grow"
                       placeholder="Ex: 44.26"
                       required
                     />
@@ -201,7 +203,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 </div>
               </div>
               {/* buttons */}
-              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-900 rounded-b">
                 {/* cancel button */}
                 <button
                   className="text-red-500 background-transparent font-bold px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -213,7 +215,7 @@ export default function AddQuizInfo({ setShowModal }) {
                 {/* submit button */}
                 <button
                   type="submit"
-                  className="border border-cyan items-center text-black bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
+                  className="border border-cyan items-center text-white bg-cyan px-4 py-1 rounded-full text-sm hover:bg-cyan-600 mr-1 mb-1 ease-linear transition-all duration-150"
                 >
                   Add
                 </button>
