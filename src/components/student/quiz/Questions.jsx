@@ -1,4 +1,5 @@
 import { useGetQuizzesByVideoIdQuery } from 'features/quizzes/quizzesApi';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Error from 'ui/Error';
 import Loading from 'ui/Loading';
@@ -6,6 +7,7 @@ import Question from './Question';
 
 /* eslint-disable react/no-unescaped-entities */
 export default function Questions() {
+  const [quizData, setQuizData] = useState();
   const { videoId } = useParams();
 
   // get quiz data from server
