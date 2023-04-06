@@ -376,6 +376,18 @@
       "repo_link": "https://github.com/codernoyan/redux-intro",
       "status": "published",
       "id": 7
+    },
+    {
+      "student_id": 6,
+      "student_name": "Riyadh",
+      "assignment_id": 1,
+      "title": "Assignment 1 - Implement Debounce Function",
+      "createdAt": "2023-04-06T06:00:36.116Z",
+      "totalMark": 100,
+      "mark": 100,
+      "repo_link": "https://github.com/codernoyan/redux-intro",
+      "status": "published",
+      "id": 8
     }
   ],
   "quizMark": [
