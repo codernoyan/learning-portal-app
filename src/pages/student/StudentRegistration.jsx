@@ -1,8 +1,12 @@
 import { useRegisterMutation } from 'features/auth/authApi';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function StudentRegistration() {
-  const [register, { isLoading, isError, error }] = useRegisterMutation();
+  const [error, setError] = useState('');
+  const [register, {
+    data, isLoading, isError, error: registrationError,
+  }] = useRegisterMutation();
   const [registerInfo, setRegisterInfo] = useState({
     name: '',
     email: '',
@@ -13,8 +17,10 @@ export default function StudentRegistration() {
   // login handler
   const handleStudentRegistration = (e) => {
     e.preventDefault();
+    // clear the error state if previous error stored
+    setError('');
     if (registerInfo.password !== registerInfo.confirmPassword) {
-      window.alert('Password does not match');
+      setError('Passwords do not match');
     } else {
       delete registerInfo.confirmPassword;
       // register
@@ -39,7 +45,6 @@ export default function StudentRegistration() {
           </h2>
         </div>
         <form onSubmit={handleStudentRegistration} className="mt-8 space-y-6" action="#" method="POST">
-          <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">Name</label>
@@ -56,6 +61,14 @@ export default function StudentRegistration() {
             <div>
               <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
               <input onChange={(e) => setRegisterInfo({ ...registerInfo, confirmPassword: e.target.value })} id="confirm-password" name="confirm-password" type="password" autoComplete="confirm-password" required className="login-input rounded-b-md" placeholder="Confirm Password" value={registerInfo.confirmPassword} />
+            </div>
+          </div>
+          <div className="flex items-center justify-end">
+            <div className="text-sm flex gap-2">
+              <span>Already have an account</span>
+              <Link to="/" className="font-medium text-violet-600 hover:text-violet-500">
+                Sign In
+              </Link>
             </div>
           </div>
           <div>
