@@ -29,7 +29,7 @@ export const rankedData = (users, assignmentMarks, quizMarks) => {
 
 export const indexedData = (gropuedArray) => {
   // create a new array with new index
-  let newIndex = 0;
+  let newIndex = 1;
   const newIndexedArray = Object?.values(gropuedArray)?.reverse()?.map((group) => {
     const finalArray = group?.map((obj) => {
       obj.index = newIndex;

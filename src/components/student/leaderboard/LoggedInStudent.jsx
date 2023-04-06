@@ -1,34 +1,34 @@
-import { useGetAssigmentMarksByStudentIdQuery } from 'features/assignmentMarks/assignmentMarksApi';
+import { useGetAssigmentMarksQuery } from 'features/assignmentMarks/assignmentMarksApi';
 import { selectAuth } from 'features/auth/authSelector';
-import { useGetQuizMarkQuery } from 'features/quizMark/quizMarkApi';
+import { useGetQuizMarksQuery } from 'features/quizMark/quizMarkApi';
+import { useGetUsersQuery } from 'features/users/usersApi';
 import { useSelector } from 'react-redux';
+import TableLoading from 'ui/TableLoading';
+import { indexedData, rankedData } from 'utils/leaderboardRankData';
+import LoggedInStudentRank from './LoggedInStudentRank';
 
-export default function LoggedInStudent({ info }) {
+export default function LoggedInStudent() {
   // get logged in student's info
   const { user: { id, name } } = useSelector(selectAuth) || {};
-
-  // get logged in student's assignment mark
+  // testing code
   const {
-    data: assignmentMarks, isLoading: assignmentMarkLoading, isError, error,
-  } = useGetAssigmentMarksByStudentIdQuery(id);
+    data: users, isLoading, isError, error,
+  } = useGetUsersQuery();
+  const { data: assignmentMarksNew } = useGetAssigmentMarksQuery();
+  const { data: quizMarksNew, isLoading: quizLoading } = useGetQuizMarksQuery();
 
-  // get logged in student's quiz mark
-  const { data: quizmarks, isLoading: quizMarkLoading } = useGetQuizMarkQuery(id);
-
-  // get student data
-  // sum of assignment mark
-  const sumOfAssignmentMark = assignmentMarks?.reduce((prev, curr) => prev + curr.mark, 0);
-  const sumOfQuizMark = quizmarks?.reduce((prev, curr) => prev + curr.mark, 0);
-
-  // total mark calculation
-  let totalMark = 0;
-  let index = 0;
-  if (assignmentMarkLoading && quizMarkLoading) {
-    totalMark = 'Loading';
-    index = 'Loading';
-  } else if (!assignmentMarkLoading && !quizMarkLoading) {
-    totalMark = sumOfAssignmentMark + sumOfQuizMark;
-    index = (info?.index || 0) + 1;
+  const gropuedArrayNew = rankedData(users, assignmentMarksNew, quizMarksNew);
+  let content = null;
+  if (isLoading) {
+    content = <TableLoading />;
+  } else if (!isLoading && isError) {
+    content = <tr><td>{error?.error}</td></tr>;
+  } else if (!isLoading && !isError && Object.keys(gropuedArrayNew)?.length === 0) {
+    content = <tr><td>No student found!</td></tr>;
+  } else if (!isLoading && !isError && Object.keys(gropuedArrayNew)?.length > 0) {
+    const indexedDataNew = indexedData(gropuedArrayNew);
+    const loggedInStudentData = indexedDataNew?.find((user) => user?.id === id);
+    content = <LoggedInStudentRank loggedInStudentData={loggedInStudentData} />;
   }
 
   return (
@@ -45,13 +45,14 @@ export default function LoggedInStudent({ info }) {
           </tr>
         </thead>
         <tbody>
-          <tr className="border-2 border-cyan">
+          {/* <tr className="border-2 border-cyan">
             <td className="table-td text-center font-bold">{index}</td>
             <td className="table-td text-center font-bold">{name}</td>
             <td className="table-td text-center font-bold">{quizMarkLoading ? 'Loading' : sumOfQuizMark}</td>
             <td className="table-td text-center font-bold">{assignmentMarkLoading ? 'Loading' : sumOfAssignmentMark}</td>
             <td className="table-td text-center font-bold">{totalMark}</td>
-          </tr>
+          </tr> */}
+          {content}
         </tbody>
       </table>
     </div>
