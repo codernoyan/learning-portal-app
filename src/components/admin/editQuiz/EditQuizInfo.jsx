@@ -110,7 +110,9 @@ export default function EditQuizInfo({ quiz, setShowModal }) {
             {/* header */}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-900 rounded-t">
               <h3 className="text-2xl font-semibold text-white">
-                Add Quiz
+                Edit
+                {' '}
+                <span className="text-cyan-500">Quiz</span>
               </h3>
               <button
                 type="button"
@@ -256,7 +258,7 @@ export default function EditQuizInfo({ quiz, setShowModal }) {
                 {/* submit button */}
                 <button
                   type="submit"
-                  className="border border-cyan items-center text-white bg-cyan-600 px-4 py-1 rounded-full text-sm hover:bg-cyan hover:text-white mr-1 mb-1 ease-linear transition-all duration-150"
+                  className="border border-cyan items-center text-white bg-cyan px-4 py-1 rounded-full text-sm hover:bg-cyan-600 mr-1 mb-1 ease-linear transition-all duration-150"
                 >
                   Save
                 </button>
