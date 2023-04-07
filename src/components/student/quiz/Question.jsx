@@ -1,14 +1,13 @@
 import { useGetQuizQuery } from 'features/quizzes/quizzesApi';
 import { useState } from 'react';
-import { countRightAnswers } from 'utils/checkCorrectAnswer';
 
 export default function Question({ quiz, index }) {
   const { id, question, options } = quiz || {};
   const [answers, setAnswers] = useState([]);
   const { data: quizData } = useGetQuizQuery(id);
-
-  const rightAnswerCount = countRightAnswers(quizData, answers);
-  console.log(rightAnswerCount);
+  // const dispatch = useDispatch();
+  // const { answers } = useSelector((state) => state.quiz);
+  // console.log(answers);
 
   return (
     <div className="quiz">
@@ -29,9 +28,6 @@ export default function Question({ quiz, index }) {
               <input
                 type="checkbox"
                 id={`option${option?.id}_q${id}`}
-                onChange={() => setAnswers((prev) => [...prev, {
-                  id: option.id, option: option.option, isCorrect: option.isCorrect,
-                }])}
               />
               {option.option}
             </label>

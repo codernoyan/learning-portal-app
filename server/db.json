@@ -318,6 +318,34 @@
         }
       ],
       "id": 6
+    },
+    {
+      "question": "What is loop in javascript?",
+      "video_id": 3,
+      "video_title": "#3 Full-stack Army Intro - কি আছে আর কারা করতে পারবে | Full-stack Army",
+      "options": [
+        {
+          "id": 1,
+          "option": "method",
+          "isCorrect": false
+        },
+        {
+          "id": 2,
+          "option": "nothing",
+          "isCorrect": false
+        },
+        {
+          "id": 3,
+          "option": "redux state",
+          "isCorrect": false
+        },
+        {
+          "id": 4,
+          "option": "built in function",
+          "isCorrect": true
+        }
+      ],
+      "id": 7
     }
   ],
   "assignmentMark": [

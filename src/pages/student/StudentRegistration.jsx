@@ -1,6 +1,6 @@
 import { useRegisterMutation } from 'features/auth/authApi';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function StudentRegistration() {
   const [error, setError] = useState('');
@@ -13,6 +13,11 @@ export default function StudentRegistration() {
     password: '',
     confirmPassword: '',
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(error);
+  }, [error, registrationError]);
 
   // login handler
   const handleStudentRegistration = (e) => {
@@ -32,6 +37,7 @@ export default function StudentRegistration() {
         password: '',
         confirmPassword: '',
       });
+      navigate('/course/videos/1');
     }
   };
 
@@ -62,6 +68,7 @@ export default function StudentRegistration() {
               <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
               <input onChange={(e) => setRegisterInfo({ ...registerInfo, confirmPassword: e.target.value })} id="confirm-password" name="confirm-password" type="password" autoComplete="confirm-password" required className="login-input rounded-b-md" placeholder="Confirm Password" value={registerInfo.confirmPassword} />
             </div>
+            {error !== '' && <h2 className="text-rose-500 mt-4 font-semibold">{error}</h2>}
           </div>
           <div className="flex items-center justify-end">
             <div className="text-sm flex gap-2">
