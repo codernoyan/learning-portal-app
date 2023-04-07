@@ -39,7 +39,7 @@ export default function AddAssignmentInfo({ setShowModal }) {
           {/* content */}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-slate-900 outline-none focus:outline-none">
             {/* header */}
-            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-950 rounded-t">
+            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-900 rounded-t">
               <h3 className="text-2xl font-semibold text-white">
                 Add
                 {' '}
@@ -57,7 +57,7 @@ export default function AddAssignmentInfo({ setShowModal }) {
             </div>
             {/* body */}
             <form onSubmit={handleAddAssignment}>
-              <div className="relative p-6 flex-auto">
+              <div className="relative px-6 py-1 flex-auto">
                 {/* assignment title */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="assignment" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Assignment Title</label>
@@ -90,7 +90,7 @@ export default function AddAssignmentInfo({ setShowModal }) {
                 </div>
               </div>
               {/* buttons */}
-              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-950 rounded-b">
+              <div className="flex items-center justify-end p-6 border-t border-solid border-slate-900 rounded-b">
                 {/* cancel button */}
                 <button
                   className="text-red-500 background-transparent font-bold px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

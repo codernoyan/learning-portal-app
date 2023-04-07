@@ -126,7 +126,7 @@ export default function EditQuizInfo({ quiz, setShowModal }) {
             </div>
             {/* body */}
             <form onSubmit={handleEditQuiz}>
-              <div className="relative p-6 flex-auto">
+              <div className="relative px-6 py-1 flex-auto">
                 {/* quiz quiestion */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="quiz" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Quiz Title</label>

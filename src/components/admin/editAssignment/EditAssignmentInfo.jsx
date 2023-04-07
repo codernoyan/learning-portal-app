@@ -81,7 +81,7 @@ export default function EditAssignmentInfo({ assignment, setShowModal }) {
             </div>
             {/* body */}
             <form onSubmit={handleAddAssignment}>
-              <div className="relative p-6 flex-auto">
+              <div className="relative px-6 py-1 flex-auto">
                 {/* assignment title */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="assignment" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Assignment Title</label>
