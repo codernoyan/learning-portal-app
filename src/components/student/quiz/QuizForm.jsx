@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 
 /* eslint-disable react/no-unescaped-entities */
 export default function QuizForm() {
-  const [quizData, setQuizData] = useState();
+  // const [quizData, setQuizData] = useState();
   const { videoId } = useParams();
-
+  const [answers, setAnswers] = useState();
   // get quiz data from server
   const {
     data: quizzes, isLoading, isError, error,
