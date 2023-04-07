@@ -28,7 +28,7 @@ export default function AddVideoInfo({ setShowModal }) {
   return (
     <>
       <div
-        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none backdrop-blur-sm"
       >
         <div className="relative w-full my-6 mx-auto max-w-3xl">
           {/* content */}
@@ -52,7 +52,7 @@ export default function AddVideoInfo({ setShowModal }) {
             </div>
             {/* body */}
             <form onSubmit={handleAddVideo}>
-              <div className="relative p-6 flex-auto">
+              <div className="relative px-6 py-1 flex-auto">
                 {/* title */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="assignment" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Title</label>
@@ -79,7 +79,7 @@ export default function AddVideoInfo({ setShowModal }) {
                 {/* description */}
                 <div className="flex flex-col gap-1 mb-1">
                   <label htmlFor="description" className="text-white font-semibold after:content-['*'] after:text-red-500 after:ml-1">Description</label>
-                  <textarea onChange={(e) => setInput({ ...input, description: e.target.value })} value={input.description} name="description" id="description" cols={10} rows={2} className="border border-black p-2 bg-slate-700 text-white" placeholder="write description here..." />
+                  <textarea onChange={(e) => setInput({ ...input, description: e.target.value })} value={input.description} name="description" id="description" cols={10} rows={3} className="border border-black p-2 bg-slate-700 text-white" placeholder="write description here..." />
                 </div>
               </div>
               {/* buttons */}
