@@ -23,7 +23,7 @@ export default function AssignmentItem({ assignment, index }) {
         {title}
       </td>
       <td className="table-td">{video_title}</td>
-      <td className="table-td">100</td>
+      <td className="table-td">{totalMark}</td>
       <td className="flex justify-center gap-x-2 text-gray-400">
         <button onClick={handleDeleteAssignment} type="button">
           <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 hover:text-red-500 cursor-pointer transition-all">

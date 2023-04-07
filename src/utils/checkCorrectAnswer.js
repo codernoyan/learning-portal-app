@@ -3,7 +3,7 @@
 //   let correctAnswers = 0;
 //   relatedQuizzes?.forEach((quiz) => {
 //     const studentAnswers = answers[quiz.id] || [];
-//     const correctOptions = quiz?.filter((option) => option?.isCorrect)?.map((option) => option?.id);
+//     const correctOptions = quiz?.options.filter((option) => option?.isCorrect)?.map((option) => option?.id);
 //     // check condition
 //     if (studentAnswers?.length === correctOptions?.length && studentAnswers?.every((answer) => correctOptions?.includes(answer))) {
 //       correctAnswers++;
