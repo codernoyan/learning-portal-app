@@ -19,7 +19,6 @@ export default function QuizForm() {
   } = useGetQuizzesByVideoIdQuery(videoId) || {};
   // use a function to count score and right or wrong count
   const quizScores = calculateQuizScore(quizzes, answers);
-  // console.log(quizScores);
 
   const handleAddQuizMark = () => {
     const wrongCount = quizScores?.reduce((prev, curr) => prev + curr.wrongAnswerCount, 0);
@@ -71,18 +70,7 @@ export default function QuizForm() {
                           id={`option${option?.id}_q${id}`}
                           onChange={() => {
                             const checkQuiz = answers?.find((answer) => answer.quizId === id && answer.optionId === option?.id);
-                            // console.log(checkQuiz);
                             const quizOptionSelect = answers?.find((choice) => choice.optionId === option?.id);
-                            console.log('check', !checkQuiz);
-                            // condition
-                            // if (checkQuiz) {
-                            //   const toggledAnswer = answers.filter((answer) => answer.optionId !== option.id && answer.quizId === id);
-                            //   setAnswers(toggledAnswer);
-                            // } else if (checkQuiz) {
-                            //   setAnswers([...answers, { quizId: id, optionId: option.id, isCorrect: option.isCorrect }]);
-                            // } else if (!checkQuiz) {
-                            //   setAnswers([...answers, { quizId: id, optionId: option.id, isCorrect: option.isCorrect }]);
-                            // }
                             // condition
                             if (checkQuiz) {
                               const toggledAnswer = answers.filter((answer) => answer.id !== option.id && answer.quizId === id);

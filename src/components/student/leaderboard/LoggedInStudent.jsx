@@ -45,13 +45,6 @@ export default function LoggedInStudent() {
           </tr>
         </thead>
         <tbody>
-          {/* <tr className="border-2 border-cyan">
-            <td className="table-td text-center font-bold">{index}</td>
-            <td className="table-td text-center font-bold">{name}</td>
-            <td className="table-td text-center font-bold">{quizMarkLoading ? 'Loading' : sumOfQuizMark}</td>
-            <td className="table-td text-center font-bold">{assignmentMarkLoading ? 'Loading' : sumOfAssignmentMark}</td>
-            <td className="table-td text-center font-bold">{totalMark}</td>
-          </tr> */}
           {content}
         </tbody>
       </table>

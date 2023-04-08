@@ -42,7 +42,6 @@ export default function VideoItem({ video, index }) {
         {/* edit button */}
         <EditVideoModal id={id} />
       </td>
-      {/* <td><EditVideoModal /></td> */}
     </tr>
   );
 }
