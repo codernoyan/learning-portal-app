@@ -4,7 +4,6 @@ import QuizForm from 'components/student/quiz/QuizForm';
 export default function Quiz() {
   return (
     <section className="py-6 bg-primary">
-      {/* <Questions /> */}
       <QuizForm />
     </section>
   );

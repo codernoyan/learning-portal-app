@@ -1,6 +1,7 @@
 import { useGetQuizzesByVideoIdQuery } from 'features/quizzes/quizzesApi';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { calculateQuizScore } from 'utils/checkCorrectAnswer';
 
 /* eslint-disable react/no-unescaped-entities */
 export default function QuizForm() {
@@ -17,8 +18,9 @@ export default function QuizForm() {
   const {
     data: quizzes, isLoading, isError, error,
   } = useGetQuizzesByVideoIdQuery(videoId) || {};
-
-  console.log(answers);
+  // const score = checkQuizAnswers(quizzes, answers);
+  const quizScores = calculateQuizScore(quizzes, answers);
+  console.log(quizScores);
 
   return (
     <div className="mx-auto max-w-7xl px-5 lg:px-0">
