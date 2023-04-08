@@ -32,7 +32,6 @@ export default function VideoDescription({ video = {} }) {
     content = <AssignmentModal id={id} />;
     isAuizSubmitted = quizMark?.filter((mark) => mark.video_id === id && mark.student_id === user?.id);
   }
-  console.log(isAuizSubmitted);
 
   return (
     <div>
