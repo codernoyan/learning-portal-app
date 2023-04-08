@@ -10,8 +10,6 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // localStorage.clear();
-    // dispatch(userLogout());
     if (user?.role === 'student') {
       localStorage.clear();
       dispatch(userLogout());
