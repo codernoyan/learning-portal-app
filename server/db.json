@@ -292,28 +292,28 @@
       "id": 5
     },
     {
-      "question": "difference between react and angular",
+      "question": "What is the difference between react and angular?",
       "video_id": 3,
       "video_title": "#3 Full-stack Army Intro - কি আছে আর কারা করতে পারবে | Full-stack Army",
       "options": [
         {
           "id": 1,
-          "option": "dom",
+          "option": "Angular is a framework",
           "isCorrect": false
         },
         {
           "id": 2,
-          "option": "loop",
+          "option": "React is a javascript library",
           "isCorrect": false
         },
         {
           "id": 3,
-          "option": "function",
+          "option": "Both A and B",
           "isCorrect": true
         },
         {
           "id": 4,
-          "option": "class",
+          "option": "None of these",
           "isCorrect": false
         }
       ],

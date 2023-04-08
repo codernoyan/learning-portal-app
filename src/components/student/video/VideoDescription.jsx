@@ -1,4 +1,5 @@
 import { useGetAssignmentByVideoIdQuery } from 'features/assignments/assignmentsApi';
+import { useGetQuizzesByVideoIdQuery } from 'features/quizzes/quizzesApi';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AssignmentModal from './AssignmentModal';
@@ -12,6 +13,8 @@ export default function VideoDescription({ video = {} }) {
   const {
     data: assignment, isLoading, isError, error,
   } = useGetAssignmentByVideoIdQuery(id);
+
+  const { data: quizzes } = useGetQuizzesByVideoIdQuery(id);
 
   let content = null;
   if (isLoading) {
@@ -37,11 +40,15 @@ export default function VideoDescription({ video = {} }) {
       </h2>
       <div className="flex gap-4">
         {content}
-        <Link to={`/quiz/${id}`} className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
-          কুইজে
-          অংশগ্রহণ
-          করুন
-        </Link>
+        {
+          quizzes?.length !== 0 && (
+          <Link to={`/quiz/${id}`} className="px-3 font-bold py-1 border border-cyan text-cyan rounded-full text-sm hover:bg-cyan hover:text-primary">
+            কুইজে
+            অংশগ্রহণ
+            করুন
+          </Link>
+          )
+        }
       </div>
       <p className="mt-4 text-sm text-slate-400 leading-6">
         {description}

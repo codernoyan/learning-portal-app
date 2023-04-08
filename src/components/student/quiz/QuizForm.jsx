@@ -6,11 +6,20 @@ import { useParams } from 'react-router-dom';
 export default function QuizForm() {
   // const [quizData, setQuizData] = useState();
   const { videoId } = useParams();
-  const [answers, setAnswers] = useState();
+  const [answers, setAnswers] = useState([
+    // {
+    //   quizId: '',
+    //   optionId: '',
+    //   isCorrect: false,
+    // },
+  ]);
   // get quiz data from server
   const {
     data: quizzes, isLoading, isError, error,
   } = useGetQuizzesByVideoIdQuery(videoId) || {};
+
+  console.log(answers);
+
   return (
     <div className="mx-auto max-w-7xl px-5 lg:px-0">
       <div className="mb-8">
@@ -20,10 +29,9 @@ export default function QuizForm() {
         <p className="text-sm text-slate-200">Each question contains 5 Mark</p>
       </div>
       <div className="space-y-8 ">
-        <form>
-          {
+        {
             quizzes?.map(({ id, question, options }, index) => (
-              <div className="quiz mb-4">
+              <div key={id} className="quiz mb-4">
                 <h4 className="question">
                   Quiz
                   {' '}
@@ -33,24 +41,37 @@ export default function QuizForm() {
                   {' '}
                   {question}
                 </h4>
-                <div className="quizOptions">
-                  {/* Option 1 */}
+                <form className="quizOptions">
                   {
                     options?.map((option) => (
-                      <label key={option.id} htmlFor={`option${option?.id}_q${id}`}>
+                      <label key={option?.id} htmlFor={`option${option?.id}_q${id}`}>
                         <input
                           type="checkbox"
                           id={`option${option?.id}_q${id}`}
+                          onChange={() => {
+                            const checkQuiz = answers?.find((answer) => answer.quizId === id && answer.optionId === option?.id);
+                            // console.log(checkQuiz);
+                            const quizOptionSelect = answers?.find((choice) => choice.optionId === option?.id);
+                            console.log('check', !checkQuiz);
+                            // condition
+                            // if (checkQuiz) {
+                            //   const toggledAnswer = answers.filter((answer) => answer.optionId !== option.id && answer.quizId === id);
+                            //   setAnswers(toggledAnswer);
+                            // } else if (checkQuiz) {
+                            //   setAnswers([...answers, { quizId: id, optionId: option.id, isCorrect: option.isCorrect }]);
+                            // } else if (!checkQuiz) {
+                            //   setAnswers([...answers, { quizId: id, optionId: option.id, isCorrect: option.isCorrect }]);
+                            // }
+                          }}
                         />
                         {option.option}
                       </label>
                     ))
                   }
-                </div>
+                </form>
               </div>
             ))
           }
-        </form>
       </div>
       <button type="button" className="px-4 py-2 rounded-full bg-cyan block ml-auto mt-8 hover:opacity-90 active:opacity-100 active:scale-95 ">Submit</button>
     </div>
