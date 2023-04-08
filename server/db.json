@@ -62,6 +62,13 @@
       "name": "William Simith",
       "role": "student",
       "id": 9
+    },
+    {
+      "email": "tanjim@gmail.com",
+      "password": "$2a$10$BH6UxkkAJihTFbnlqF2aae6iMMpqnSmKLpQtpns1LdBAgatgCkQ/a",
+      "name": "Tanjim",
+      "role": "student",
+      "id": 10
     }
   ],
   "videos": [

@@ -62,6 +62,13 @@ export default function QuizForm() {
                             // } else if (!checkQuiz) {
                             //   setAnswers([...answers, { quizId: id, optionId: option.id, isCorrect: option.isCorrect }]);
                             // }
+                            // condition
+                            if (checkQuiz) {
+                              const toggledAnswer = answers.filter((answer) => answer.id !== option.id && answer.quizId === id);
+                              setAnswers(toggledAnswer);
+                            } else if (!checkQuiz) {
+                              setAnswers([...answers, { quizId: id, ...option }]);
+                            }
                           }}
                         />
                         {option.option}

@@ -15,10 +15,6 @@ export default function StudentRegistration() {
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(error);
-  }, [error, registrationError]);
-
   // login handler
   const handleStudentRegistration = (e) => {
     e.preventDefault();
@@ -30,6 +26,15 @@ export default function StudentRegistration() {
       delete registerInfo.confirmPassword;
       // register
       register({ ...registerInfo, role: 'student' });
+    }
+  };
+
+  // check error or success to navigate
+  useEffect(() => {
+    if (registrationError?.data) {
+      setError(registrationError?.data);
+    }
+    if (data?.accessToken && data?.user) {
       // reset
       setRegisterInfo({
         name: '',
@@ -39,7 +44,7 @@ export default function StudentRegistration() {
       });
       navigate('/course/videos/1');
     }
-  };
+  }, [data, registrationError, navigate]);
 
   return (
     <section className="py-6 bg-primary h-screen grid place-items-center">
