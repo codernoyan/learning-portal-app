@@ -1,26 +1,45 @@
+import { selectAuth } from 'features/auth/authSelector';
+import { useAddQuizMarkMutation } from 'features/quizMark/quizMarkApi';
 import { useGetQuizzesByVideoIdQuery } from 'features/quizzes/quizzesApi';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { calculateQuizScore } from 'utils/checkCorrectAnswer';
 
 /* eslint-disable react/no-unescaped-entities */
 export default function QuizForm() {
-  // const [quizData, setQuizData] = useState();
+  const [addQuizMark] = useAddQuizMarkMutation();
+  const { user } = useSelector(selectAuth);
   const { videoId } = useParams();
-  const [answers, setAnswers] = useState([
-    // {
-    //   quizId: '',
-    //   optionId: '',
-    //   isCorrect: false,
-    // },
-  ]);
+  const [answers, setAnswers] = useState([]);
+  const navigate = useNavigate();
   // get quiz data from server
   const {
     data: quizzes, isLoading, isError, error,
   } = useGetQuizzesByVideoIdQuery(videoId) || {};
-  // const score = checkQuizAnswers(quizzes, answers);
+  // use a function to count score and right or wrong count
   const quizScores = calculateQuizScore(quizzes, answers);
-  console.log(quizScores);
+  // console.log(quizScores);
+
+  const handleAddQuizMark = () => {
+    const wrongCount = quizScores?.reduce((prev, curr) => prev + curr.wrongAnswerCount, 0);
+    const correctCount = quizScores?.reduce((prev, curr) => prev + curr.score, 0);
+    const rightCount = correctCount === 5 ? 1 : 2;
+    const data = {
+      student_id: user?.id,
+      student_name: user?.name,
+      video_id: Number(videoId),
+      video_title: quizzes?.[0]?.video_title,
+      totalQuiz: quizzes?.length,
+      totalCorrect: rightCount,
+      totalWrong: wrongCount,
+      totalMark: correctCount,
+      mark: 5,
+    };
+    // add quiz mark to server
+    addQuizMark(data);
+    navigate('/leaderboard');
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-5 lg:px-0">
@@ -82,7 +101,7 @@ export default function QuizForm() {
             ))
           }
       </div>
-      <button type="button" className="px-4 py-2 rounded-full bg-cyan block ml-auto mt-8 hover:opacity-90 active:opacity-100 active:scale-95 ">Submit</button>
+      <button onClick={handleAddQuizMark} type="button" className="px-4 py-2 rounded-full bg-cyan block ml-auto mt-8 hover:opacity-90 active:opacity-100 active:scale-95 ">Submit</button>
     </div>
   );
 }

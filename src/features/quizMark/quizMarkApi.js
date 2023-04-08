@@ -18,8 +18,21 @@ export const quizMarkApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      // pessimistic update for add video
+      async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
+        try {
+          const quizMark = await queryFulfilled;
+          if (Object.keys(quizMark.data).length > 1) {
+            dispatch(apiSlice.util.updateQueryData('getQuizMarks', undefined, (draft) => {
+              draft.push(quizMark.data);
+            }));
+          }
+        } catch (err) {
+          // console.log(err);
+        }
+      },
     }),
   }),
 });
 
-export const { useGetQuizMarksQuery, useGetQuizMarkQuery } = quizMarkApi;
+export const { useGetQuizMarksQuery, useGetQuizMarkQuery, useAddQuizMarkMutation } = quizMarkApi;
