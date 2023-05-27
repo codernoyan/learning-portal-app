@@ -69,6 +69,13 @@
       "name": "Tanjim",
       "role": "student",
       "id": 10
+    },
+    {
+      "email": "noyan123@gmail.com",
+      "password": "$2a$10$Bh1vFDfVs1ajKIK1oUbX7.6sr6MjBMRGBeXdvia.AAJgUXtoaUSPm",
+      "name": "Noyan Dey",
+      "role": "student",
+      "id": 11
     }
   ],
   "videos": [
